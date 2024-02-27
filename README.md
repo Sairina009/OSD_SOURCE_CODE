@@ -18,12 +18,20 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
     sudo mysql -u root -p kvm < /DATABASE/kvm.sql
     save the file.
 
-    Also check the path of OSD_SOURCE_CODE:
+    Also check the path of OSD_SOURCE_CODE folder:
     Update the path of the OSD_SOURCE_CODE folder in the php_setup.sh file loacted in the install folder.
     cd /OSD_SOURCE_CODE/install
     vi php_setup.sh 
-    sudo cp -r /path/to/OSD_SOURCE_CODE/* /var/www/html/od        ----- change the path of OSD_SOURCE_CODE in this line 
-    save the file
+    sudo cp -r /path/to/OSD_SOURCE_CODE/* /var/www/html/od        -----(change the path of OSD_SOURCE_CODE in this line)
+    Save the file.
+
+    Update your board ip address in the update_ws_ip.sh file loacted in the install folder.
+    cd /OSD_SOURCE_CODE/install
+    vi update_ws_ip.sh 
+    # Define the desired IP address
+    new_ip_address="your_desired_ip_address"                      ------(change "your_desired_ip_address" with your board's ip address)
+    Save the file
+
     Run this script: While running it will ask for password enter system's password.
     ./setup.sh
 
