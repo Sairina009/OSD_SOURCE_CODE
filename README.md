@@ -30,6 +30,8 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
     new_ip_address="your_desired_ip_address"                      ------(change "your_desired_ip_address" with your board's ip address)
     Save the file
 
+    Make the file executable:
+    chmod +x setup.sh
     Run this script: While running it will ask for password enter system's password.
     ./setup.sh
 
@@ -62,7 +64,7 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
 ## Working modules on OSD
   
    Able to view the stream on OSD.
-   Able to Update all the values from OSD into database and reflect them on OSD.
+   Able to Update all the values from OSD i.e portaname, mac address, resolution, audio, framerate, etc. into Database and reflect them on OSD.
    Hotkey function with Ctrl key.
 
 ## Known Issues
