@@ -1,1 +1,72 @@
-# OSD_CODE
+# OSD PHP Pages Installation Guide
+
+## Overview
+This guide will help you set up PHP pages on your server with Nginx, MySQL, and PHP.
+
+## Requirements
+- Nginx
+- MySQL Database Server
+- PHP-FPM
+- PHP
+
+1. **Installation Steps:**
+    Extract the OSD_SOURCE_CODE folder and go to DATABASE folder and check it's path:
+    Update the path of the DATABASE folder in the mysql_setup.sh file loacted in the install folder.
+    cd /OSD_SOURCE_CODE/install
+    vi mysql_setup.sh
+    # Import Database File (Replace /path/to/kvm.sql with the actual path)
+    sudo mysql -u root -p kvm < /DATABASE/kvm.sql
+    save the file.
+
+    Also check the path of OSD_SOURCE_CODE:
+    Update the path of the OSD_SOURCE_CODE folder in the php_setup.sh file loacted in the install folder.
+    cd /OSD_SOURCE_CODE/install
+    vi php_setup.sh 
+    sudo cp -r /path/to/OSD_SOURCE_CODE/* /var/www/html/od        ----- change the path of OSD_SOURCE_CODE in this line 
+    save the file
+    Run this script: While running it will ask for password enter system's password.
+    ./setup.sh
+
+2. **Access PHP Pages:**
+   Open a web browser and navigate to your Board IP address and speccify /od.
+   Navigate through od folder and select index.php
+   (eg. 192.168.0.108/od/index.php)   where 192.168.0.108 is your board ip address.
+
+3. **Login as Admin:**
+   On the Login page enter login credentials as:
+    - Username: Admin
+    - Password: Admin@123
+    - Now you will be able to access the OSD pages and navigate through different tabs and make changes accordingly.
+
+4. **Login as User:**
+    On the Login page enter login credentials as:
+    - Username: User2
+    - Password: User2@12345
+    - Now you will be able to view the OSD pages.
+
+5. **OSD pages will display on the browser**
+
+6. **Make changes on OSD:**
+    To access the video stream from encoder you can navigate through:
+    Port Access-> Encoder you want to view-> Click on Connect button.
+    To change the Resolution:
+    Port Setting-> Resolution-> Select the resolution from the dropdown list for the encoder you want-> Click on Save button.
+    Similarly for audio, framerate, mac address go to Port Setting tab and then the respective tab you want to make changes and click on Save button.
+
+## Working modules on OSD
+  
+   Able to view the stream on OSD
+   Able to Update all the values from OSD into database and reflect them on OSD.
+   Hotkey function with Ctrl key 
+
+## Known Issues
+   
+   Delay in streaming 
+   Kvm Upgrade, Dongle Upgrade not implemented
+   Encryption is not implemented
+   Virtual Media, Port authority, Port Scan not implemented
+   USB mass storage, card reader not implemented
+
+## Troubleshooting
+- Ensure that file permissions are set correctly on the PHP files and directories.
+- Verify that Nginx, MySQL, and PHP-FPM are all running and configured correctly.
