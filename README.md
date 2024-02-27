@@ -14,8 +14,7 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
     Update the path of the DATABASE folder in the mysql_setup.sh file loacted in the install folder.
     cd /OSD_SOURCE_CODE/install
     vi mysql_setup.sh
-    # Import Database File (Replace /path/to/kvm.sql with the actual path)
-    sudo mysql -u root -p kvm < /DATABASE/kvm.sql
+    sudo mysql -u root -p kvm < /path/to/kvm.sql             ------- (Replace /path/to/kvm.sql with the actual path)
     save the file.
 
     Also check the path of OSD_SOURCE_CODE folder:
@@ -28,7 +27,6 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
     Update your board ip address in the update_ws_ip.sh file loacted in the install folder.
     cd /OSD_SOURCE_CODE/install
     vi update_ws_ip.sh 
-    # Define the desired IP address
     new_ip_address="your_desired_ip_address"                      ------(change "your_desired_ip_address" with your board's ip address)
     Save the file
 
