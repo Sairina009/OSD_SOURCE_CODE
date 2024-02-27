@@ -55,17 +55,17 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
 
 ## Working modules on OSD
   
-   Able to view the stream on OSD
+   Able to view the stream on OSD.
    Able to Update all the values from OSD into database and reflect them on OSD.
-   Hotkey function with Ctrl key 
+   Hotkey function with Ctrl key.
 
 ## Known Issues
    
-   Delay in streaming 
-   Kvm Upgrade, Dongle Upgrade not implemented
-   Encryption is not implemented
-   Virtual Media, Port authority, Port Scan not implemented
-   USB mass storage, card reader not implemented
+   Delay in streaming.
+   Kvm Upgrade, Dongle Upgrade not implemented.
+   Encryption is not implemented.
+   Virtual Media, Port authority, Port Scan not implemented.
+   USB mass storage, card reader not implemented.
 
 ## Troubleshooting
 - Ensure that file permissions are set correctly on the PHP files and directories.
