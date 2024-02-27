@@ -63,20 +63,20 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
 
 ## Working modules on OSD
   
-   -Able to view the stream on OSD.
-   -Able to Update all the values from OSD i.e portaname, mac address, resolution, audio, framerate, etc. into Database and reflect them on OSD.
-   -Able Update Username and enable or disable user.
-   -Able to give Admin or User authority to users.
-   -Hotkey function with Ctrl key.
+   Able to view the stream on OSD.
+   Able to Update all the values from OSD i.e portaname, mac address, resolution, audio, framerate, etc. into Database and reflect them on OSD.
+   Able Update Username and enable or disable user.
+   Able to give Admin or User authority to users.
+   Hotkey function with Ctrl key.
 
 ## Known Issues
    
-   -Delay in streaming.
-   -USB Mass Storage is not working.
-   -Kvm Upgrade, Dongle Upgrade not implemented.
-   -Encryption is not implemented.
-   -Virtual Media, Port authority, Port Scan not implemented.
-   -USB mass storage, card reader not implemented.
+   Delay in streaming.
+   USB Mass Storage is not working.
+   Kvm Upgrade, Dongle Upgrade not implemented.
+   Encryption is not implemented.
+   Virtual Media, Port authority, Port Scan not implemented.
+   USB mass storage, card reader not implemented.
 
 ## Troubleshooting
 - Ensure that file permissions are set correctly on the PHP files and directories.
