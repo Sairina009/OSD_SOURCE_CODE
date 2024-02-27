@@ -10,30 +10,30 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
 - PHP
 
 1. **Installation Steps:**
-    Extract the OSD_SOURCE_CODE folder and go to DATABASE folder and check it's path:
-    Update the path of the DATABASE folder in the mysql_setup.sh file loacted in the install folder.
-    cd /OSD_SOURCE_CODE/install
-    vi mysql_setup.sh
-    sudo mysql -u root -p kvm < /path/to/kvm.sql             ------- (Replace /path/to/kvm.sql with the actual path)
-    save the file.
+    1. Extract the OSD_SOURCE_CODE folder and go to DATABASE folder and check it's path:
+        Update the path of the DATABASE folder in the mysql_setup.sh file loacted in the install folder.
+        cd /OSD_SOURCE_CODE/install
+        vi mysql_setup.sh
+        sudo mysql -u root -p kvm < /path/to/kvm.sql             ------- (Replace /path/to/kvm.sql with the actual path)
+        save the file.
 
-    Also check the path of OSD_SOURCE_CODE folder:
-    Update the path of the OSD_SOURCE_CODE folder in the php_setup.sh file loacted in the install folder.
-    cd /OSD_SOURCE_CODE/install
-    vi php_setup.sh 
-    sudo cp -r /path/to/OSD_SOURCE_CODE/* /var/www/html/od        -----(change the path of OSD_SOURCE_CODE in this line)
-    Save the file.
+    2. Check the path of OSD_SOURCE_CODE folder:
+        Update the path of the OSD_SOURCE_CODE folder in the php_setup.sh file loacted in the install folder.
+        cd /OSD_SOURCE_CODE/install
+        vi php_setup.sh 
+        sudo cp -r /path/to/OSD_SOURCE_CODE/* /var/www/html/od        -----(change the path of OSD_SOURCE_CODE in this line)
+        Save the file.
 
-    Update your board ip address in the update_ws_ip.sh file loacted in the install folder.
-    cd /OSD_SOURCE_CODE/install
-    vi update_ws_ip.sh 
-    new_ip_address="your_desired_ip_address"                      ------(change "your_desired_ip_address" with your board's ip address)
-    Save the file
+    3. Update your board ip address in the update_ws_ip.sh file loacted in the install folder.
+        cd /OSD_SOURCE_CODE/install
+        vi update_ws_ip.sh 
+        new_ip_address="your_desired_ip_address"                      ------(change "your_desired_ip_address" with your board's ip address)
+        Save the file
 
-    Make the file executable:
-    chmod +x setup.sh
-    Run this script: While running it will ask for password enter system's password.
-    ./setup.sh
+    4. Make the file executable:
+        chmod +x setup.sh
+        Run this script: While running it will ask for password enter system's password.
+        ./setup.sh
 
 2. **Access PHP Pages:**
    Open a web browser and navigate to your Board IP address and speccify /od.
