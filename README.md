@@ -65,6 +65,8 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
   
    Able to view the stream on OSD.
    Able to Update all the values from OSD i.e portaname, mac address, resolution, audio, framerate, etc. into Database and reflect them on OSD.
+   Able Update Username and enable or disable user.
+   Able to give Admin or User authority to users.
    Hotkey function with Ctrl key.
 
 ## Known Issues
