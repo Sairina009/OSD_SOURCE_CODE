@@ -70,6 +70,7 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
 ## Known Issues
    
    Delay in streaming.
+   USB Mass Storage is not working.
    Kvm Upgrade, Dongle Upgrade not implemented.
    Encryption is not implemented.
    Virtual Media, Port authority, Port Scan not implemented.
