@@ -1,0 +1,197 @@
+<script src="keyboard.min.js"></script>
+<script>
+   var currentPort = getCurrentPort();
+
+    function getCurrentPort() {
+        var urlParams = new URLSearchParams(window.location.search);
+        var portParam = urlParams.get('port');
+        return portParam ? parseInt(portParam, 10) : 1;
+    }
+
+    function setPort(newPort) {
+        currentPort = newPort;
+        window.location.href = 'port' + currentPort + '.php?port=' + currentPort;
+    }
+
+    function handleKeys(e) {
+    
+        var capsLockActive = e.getModifierState('CapsLock');
+
+        if (e.ctrlKey) {
+            if ((capsLockActive && e.key === 'ArrowUp') || (!capsLockActive && e.key === 'ArrowDown') && currentPort < 32) {
+                setPort(currentPort + 1);
+            } else if ((capsLockActive && e.key === 'ArrowDown') || (!capsLockActive && e.key === 'ArrowUp') && currentPort > 1) {
+                setPort(currentPort - 1);
+            }
+        }
+    }
+
+    document.addEventListener('keydown', function(e) {
+        handleKeys(e);
+    });
+
+
+ window.addEventListener('keyup', function (event) {
+     if (event.getModifierState("CapsLock") && event.getModifierState("CapsLock") && event.code === 'KeyV') {
+         window.location.href = 'demo.php';
+     }
+ });
+
+
+window.addEventListener('keyup', function (event) {
+    if (event.getModifierState("CapsLock") && event.getModifierState("CapsLock") && event.code === 'KeyS'){
+        event.preventDefault();
+
+        fetch('auto-scan.php')
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+});
+
+
+    window.addEventListener('keydown', function (event) {
+
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad1') {
+         window.location.href = 'port1.php';
+         event.preventDefault();
+     }
+ });
+ window.addEventListener('keydown', function (event) {
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad2') {
+         window.location.href = 'port2.php';
+         event.preventDefault();
+     }
+ });
+  window.addEventListener('keydown', function (event) {
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad3') {
+         window.location.href = 'port3.php';
+         event.preventDefault();
+     }
+ });
+ window.addEventListener('keydown', function (event) {
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad4') {
+         window.location.href = 'port4.php';
+         event.preventDefault();
+     }
+ });
+ window.addEventListener('keydown', function (event) {
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad5') {
+         window.location.href = 'port5.php';
+         event.preventDefault();
+     }
+ });
+ window.addEventListener('keydown', function (event) {
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad6') {
+         window.location.href = 'port6.php';
+         event.preventDefault();
+     }
+ });
+ window.addEventListener('keydown', function (event) {
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad7') {
+         window.location.href = 'port8.php';
+         event.preventDefault();
+     }
+ });
+ window.addEventListener('keydown', function (event) {
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad8') {
+         window.location.href = 'port8.php';
+         event.preventDefault();
+     }
+ });
+ window.addEventListener('keydown', function (event) {
+     if (event.getModifierState("CapsLock")  && event.getModifierState("CapsLock") && event.code === 'Numpad9') {
+         window.location.href = 'port9.php';
+         event.preventDefault();
+     }
+ });
+
+window.addEventListener('keydown', function (event) {
+    if (event.getModifierState("CapsLock") && event.keyCode === 105) {
+ 
+        window.location.href = 'port11.php';
+        event.preventDefault();
+    }
+});
+
+window.addEventListener('keydown', function (event) {
+
+    var capsLockActive = event.getModifierState("CapsLock");
+
+    for (var i = 0; i <= 9; i++) {
+        var numpadKey = 'Numpad' + i;
+        if ((event.key === numpadKey || event.code === numpadKey) && capsLockActive) {
+ 
+            window.location.href = 'port' + i + '.php';
+            event.preventDefault();
+        }
+    }
+});
+
+    window.addEventListener('keydown', function (event) {
+        var capsLockActive = event.getModifierState("CapsLock");
+       for (var i = 0; i <= 9; i++) {
+            var numpadKey = 'Numpad' + i;
+            if ((event.key === numpadKey || event.code === numpadKey) && capsLockActive) {
+       
+                window.location.href = 'port' + (i + 10) + '.php';
+                event.preventDefault();
+                break; 
+            }
+        }
+    });
+</script>
+
+<script>
+    window.addEventListener('keydown', function (event) {
+
+        var capsLockActive = event.getModifierState("CapsLock");
+
+
+        for (var i = 0; i <= 9; i++) {
+            var numpadKey = 'Numpad' + i;
+            if ((event.key === numpadKey || event.code === numpadKey) && capsLockActive) {
+            
+                var portNumber = i + (capsLockActive ? 0 : 0);
+                window.location.href = 'port' + portNumber + '.php';
+                event.preventDefault();
+                break; 
+            }
+        }
+    });
+</script>
+
+
+<script>
+    window.addEventListener('keydown', function (event) {
+        
+        var capsLockActive = event.getModifierState("CapsLock");
+
+        for (var i = 10; i <= 19; i++) {
+            var numpadKey = 'Numpad' + i;
+            if ((event.key === numpadKey || event.code === numpadKey) && capsLockActive) {
+               
+                var portNumber = i + (capsLockActive ? i : 10);
+                window.location.href = 'port' + portNumber + '.php';
+                event.preventDefault();
+                break;
+            }
+        }
+    });
+</script>
+
+ <script>
+document.addEventListener('keydown', function (event) {
+    if (event.getModifierState("CapsLock")) {
+    
+        var keyNumber = parseInt(event.key, 32);
+        if (!isNaN(keyNumber) && keyNumber >= 1 && keyNumber <= 32) {
+            window.location.href = 'port' + keyNumber + '.php';
+        }
+    }
+});
+</script>

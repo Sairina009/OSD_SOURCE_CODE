@@ -1,0 +1,414 @@
+BEGIN
+    DECLARE column_name VARCHAR(255);
+    DECLARE new_value VARCHAR(255);
+     DECLARE trigger_name VARCHAR(255);
+
+     SET trigger_name='port_trigger';
+  
+    IF NEW.portname <> OLD.portname THEN
+
+        SET column_name = 'portname';
+        SET new_value = NEW.portname;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.macaddr <> OLD.macaddr THEN
+
+        SET column_name = 'macaddr';
+        SET new_value = NEW.macaddr;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+    
+    IF NEW.audio <> OLD.audio THEN
+
+        SET column_name = 'audio';
+        SET new_value = NEW.audio;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+    
+    IF NEW.linktype <> OLD.linktype THEN
+
+        SET column_name = 'linktype';
+        SET new_value = NEW.linktype;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.resolution <> OLD.resolution THEN
+
+        SET column_name = 'resolution';
+        SET new_value = NEW.resolution;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.upgrade <> OLD.upgrade THEN
+
+        SET column_name = 'upgrade';
+        SET new_value = NEW.upgrade;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.path <> OLD.path THEN
+
+        SET column_name = 'path';
+        SET new_value = NEW.path;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.format <> OLD.format THEN
+
+        SET column_name = 'format';
+        SET new_value = NEW.format;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+    
+    IF NEW.media <> OLD.media THEN
+
+        SET column_name = 'media';
+        SET new_value = NEW.media;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.connect <> OLD.connect THEN
+
+        SET column_name = 'connect';
+        SET new_value = NEW.connect;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+    
+    IF NEW.a1 <> OLD.a1 THEN
+
+        SET column_name = 'a1';
+        SET new_value = NEW.a1;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a2 <> OLD.a2 THEN
+
+        SET column_name = 'a2';
+        SET new_value = NEW.a2;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a3 <> OLD.a3 THEN
+
+        SET column_name = 'a3';
+        SET new_value = NEW.a3;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a4 <> OLD.a4 THEN
+
+        SET column_name = 'a4';
+        SET new_value = NEW.a4;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a5 <> OLD.a5 THEN
+
+        SET column_name = 'a5';
+        SET new_value = NEW.a5;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+   
+    IF NEW.a6 <> OLD.a6 THEN
+
+        SET column_name = 'a6';
+        SET new_value = NEW.a6;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a7 <> OLD.a7 THEN
+
+        SET column_name = 'a7';
+        SET new_value = NEW.a7;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a8 <> OLD.a8 THEN
+
+        SET column_name = 'a8';
+        SET new_value = NEW.a8;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a9 <> OLD.a9 THEN
+
+        SET column_name = 'a9';
+        SET new_value = NEW.a9;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a10 <> OLD.a10 THEN
+
+        SET column_name = 'a10';
+        SET new_value = NEW.a10;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a11 <> OLD.a11 THEN
+
+        SET column_name = 'a11';
+        SET new_value = NEW.a11;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a12 <> OLD.a12 THEN
+
+        SET column_name = 'a12';
+        SET new_value = NEW.a12;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a13 <> OLD.a13 THEN
+
+        SET column_name = 'a13';
+        SET new_value = NEW.a13;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a14 <> OLD.a14 THEN
+
+        SET column_name = 'a14';
+        SET new_value = NEW.a14;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a15 <> OLD.a15 THEN
+
+        SET column_name = 'a15';
+        SET new_value = NEW.a15;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.a16 <> OLD.a16 THEN
+
+        SET column_name = 'a16';
+        SET new_value = NEW.a16;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;  
+
+    IF NEW.enable1 <> OLD.enable1 THEN
+
+        SET column_name = 'enable1';
+        SET new_value = NEW.enable1;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+    
+    IF NEW.enable2 <> OLD.enable2 THEN
+
+        SET column_name = 'enable2';
+        SET new_value = NEW.enable2;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable3 <> OLD.enable3 THEN
+
+        SET column_name = 'enable3';
+        SET new_value = NEW.enable3;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable4 <> OLD.enable4 THEN
+
+        SET column_name = 'enable4';
+        SET new_value = NEW.enable4;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable5 <> OLD.enable5 THEN
+
+        SET column_name = 'enable5';
+        SET new_value = NEW.enable5;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable6 <> OLD.enable6 THEN
+
+        SET column_name = 'enable6';
+        SET new_value = NEW.enable6;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable7 <> OLD.enable7 THEN
+
+        SET column_name = 'enable7';
+        SET new_value = NEW.enable7;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable8 <> OLD.enable8 THEN
+
+        SET column_name = 'enable8';
+        SET new_value = NEW.enable8;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable9 <> OLD.enable9 THEN
+
+        SET column_name = 'enable9';
+        SET new_value = NEW.enable9;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable10 <> OLD.enable10 THEN
+
+        SET column_name = 'enable10';
+        SET new_value = NEW.enable10;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable11 <> OLD.enable11 THEN
+
+        SET column_name = 'enable11';
+        SET new_value = NEW.enable11;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable12 <> OLD.enable12 THEN
+
+        SET column_name = 'enable12';
+        SET new_value = NEW.enable12;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable13 <> OLD.enable13 THEN
+
+        SET column_name = 'enable13';
+        SET new_value = NEW.enable13;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable14 <> OLD.enable14 THEN
+
+        SET column_name = 'enable14';
+        SET new_value = NEW.enable14;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable15 <> OLD.enable15 THEN
+
+        SET column_name = 'enable15';
+        SET new_value = NEW.enable15;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.enable16 <> OLD.enable16 THEN
+
+        SET column_name = 'enable16';
+        SET new_value = NEW.enable16;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan1 <> OLD.scan1 THEN
+
+        SET column_name = 'scan1';
+        SET new_value = NEW.scan1;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+    
+    IF NEW.scan2 <> OLD.scan2 THEN
+
+        SET column_name = 'scan2';
+        SET new_value = NEW.scan2;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan3 <> OLD.scan3 THEN
+
+        SET column_name = 'scan3';
+        SET new_value = NEW.scan3;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan4 <> OLD.scan4 THEN
+
+        SET column_name = 'scan4';
+        SET new_value = NEW.scan4;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan5 <> OLD.scan5 THEN
+
+        SET column_name = 'scan5';
+        SET new_value = NEW.scan5;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan6 <> OLD.scan6 THEN
+
+        SET column_name = 'scan6';
+        SET new_value = NEW.scan6;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan7 <> OLD.scan7 THEN
+
+        SET column_name = 'scan7';
+        SET new_value = NEW.scan7;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan8 <> OLD.scan8 THEN
+
+        SET column_name = 'scan8';
+        SET new_value = NEW.scan8;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan9 <> OLD.scan9 THEN
+
+        SET column_name = 'scan9';
+        SET new_value = NEW.scan9;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+ 
+    IF NEW.scan10 <> OLD.scan10 THEN
+
+        SET column_name = 'scan10';
+        SET new_value = NEW.scan10;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan11 <> OLD.scan11 THEN
+
+        SET column_name = 'scan11';
+        SET new_value = NEW.scan11;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan12 <> OLD.scan12 THEN
+
+        SET column_name = 'scan12';
+        SET new_value = NEW.scan12;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan13 <> OLD.scan13 THEN
+
+        SET column_name = 'scan13';
+        SET new_value = NEW.scan13;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan14 <> OLD.scan14 THEN
+
+        SET column_name = 'scan14';
+        SET new_value = NEW.scan14;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan15 <> OLD.scan15 THEN
+
+        SET column_name = 'scan15';
+        SET new_value = NEW.scan15;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+    IF NEW.scan16 <> OLD.scan16 THEN
+
+        SET column_name = 'scan16';
+        SET new_value = NEW.scan16;
+        INSERT INTO port_log (port_id, table_name, column_name, new_value) VALUES (OLD.id, 'portname', column_name, new_value);
+    INSERT INTO trigger_log (trigger_name) VALUES (trigger_name); END IF;
+
+END
