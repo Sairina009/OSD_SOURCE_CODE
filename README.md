@@ -36,8 +36,7 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
         ./setup.sh
 
 2. **Access PHP Pages:**
-   Open a web browser and navigate to your Board IP address and speccify /od.
-   Navigate through od folder and select index.php
+   Open a web browser and navigate to your Board IP address and specify /od.
    (eg. 192.168.0.108/od/index.php)   where 192.168.0.108 is your board ip address.
 
 3. **Login as Admin:**
@@ -55,29 +54,34 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
 5. **OSD pages will display on the browser**
 
 6. **Make changes on OSD:**
-    -To access the video stream from encoder you can navigate through:
+    1. To access the video stream from encoder you can navigate through:
     Port Access-> Encoder you want to view-> Click on Connect button.
-    -To change the Resolution:
+    2. To change the Resolution:
     Port Setting-> Resolution-> Select the resolution from the dropdown list for the encoder you want-> Click on Save button.
-    Similarly for audio, framerate, mac address go to Port Setting tab and then the respective tab you want to make changes and click on Save button.
+    3.  To change the Mac Address:
+    Port Setting-> Mac address-> Enter the mac address for the encoder you want in the textbox -> Click on Save button.
+    4.  To change the Audio:
+    Port Setting-> Audio-> Select the Input and Format from the radio button and drop dwon list for the encoder you want-> Click on Save button.
+    5.  To change the Framerate:
+    Port Setting-> Framerate-> Select the framerate from the dropdown list for the encoder you want-> Click on Save button.
 
-## Working modules on OSD
+**Working modules on OSD:**
   
-   Able to view the stream on OSD.
-   Able to Update all the values from OSD i.e portaname, mac address, resolution, audio, framerate, etc. into Database and reflect them on OSD.
-   Able Update Username and enable or disable user.
-   Able to give Admin or User authority to users.
-   Hotkey function with Ctrl key.
+   1. Able to view the stream on OSD.
+   2. Able to Update all the values from OSD i.e portaname, mac address, resolution, audio, framerate, etc. into Database and reflect them on OSD.
+   3. Able Update Username and Enable or Disable user.
+   4. Able to give Admin or User authority to users.
+   5. Hotkey function with Ctrl key.
 
-## Known Issues
+**Known Issues:**
    
-   Delay in streaming.
-   USB Mass Storage is not working.
-   Kvm Upgrade, Dongle Upgrade not implemented.
-   Encryption is not implemented.
-   Virtual Media, Port authority, Port Scan not implemented.
-   USB mass storage, card reader not implemented.
+   1. Delay in streaming.
+   2. USB Mass Storage is not working.
+   3. Kvm Upgrade, Dongle Upgrade not implemented.
+   4. Encryption is not implemented.
+   5. Virtual Media, Port Authority, Port Scan not implemented.
+   6. USB mass storage, card reader not implemented.
 
-## Troubleshooting
+**Troubleshooting:**
 - Ensure that file permissions are set correctly on the PHP files and directories.
 - Verify that Nginx, MySQL, and PHP-FPM are all running and configured correctly.
