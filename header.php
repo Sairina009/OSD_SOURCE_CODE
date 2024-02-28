@@ -4,7 +4,14 @@ require_once 'en.php';
 //include 'caps.html';
 //include 'key.html';
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $lang['PAGETITLE']; ?></title>
 <link rel="stylesheet" href="css/usercss/bootstrap-grid.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="css/usercss/bootstrap-reboot.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" href="css/usercss/bootstrap.css" type="text/css" rel="stylesheet">
@@ -124,3 +131,5 @@ else{
         </div>
     </div>
 </header>
+</head>
+</html>
