@@ -25,10 +25,7 @@
 		    		</form>
 			</li>
 			<li style="display: inline-flex; padding: 0px 10px 0px 10px;">
-    				<form action="" method="post">
-		      			<button onclick="closeAndRedirect()">Close</button>
-
-		    		</form>
+    				<button onclick="closeWindow()">Close</button>
 			</li>
 
 		</ul>
@@ -130,24 +127,12 @@ function rmassStorage() {
               }));
 }
 </script>
-
 <script type="text/javascript">
-
-var shouldCloseAndRedirect = localStorage.getItem('closeAndRedirect');
-if (shouldCloseAndRedirect) {
-    localStorage.removeItem('closeAndRedirect');
-
-    window.open('', '_self', '');
+function closeWindow() {
     window.close();
-      window.location.href = 'user.php';
+    window.history.back();
 }
-
-function closeAndRedirect() {
-    localStorage.setItem('closeAndRedirect', 'true');
-  window.location.href = 'user.php';
-}
-
-</script>
+</script>	
 <script>
     $(document).ready(function(){
         $.ajax({
