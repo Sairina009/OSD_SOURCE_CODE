@@ -13,7 +13,7 @@ while ($result=mysqli_fetch_array($sql)) {
             $portReconnectAvailable = (time() - $reconnectTime) >= $reconnectDelay;
             $allowReconnect = $portAvailable || $portReconnectAvailable;
  ?>
-<form action="process_connection_user.php" method="post" name="form<?php echo $i; ?>" id="form<?php echo $i; ?>">
+<form action="" method="post" name="form<?php echo $i; ?>" id="form<?php echo $i; ?>">
 
     <tr align=center>
         <td style=padding:10px><input type="hidden" name="id" value="<?php echo $result['id']; ?>">
