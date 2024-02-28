@@ -33,18 +33,13 @@ while ($result=mysqli_fetch_array($sql)) {
         echo $result['scan' . $id]; ?></label></td>
         <input type="hidden" name="banner" value="<?php echo $banner;?>">
         <input type="hidden" name="time" value="<?php echo $time;?>">
-       
         <label id="msg" value=""></label>
-      
 <td align="left">
-
     &nbsp;<input type="hidden" name="portname" value="<?php echo $result['portname']; ?>">
     <?php
-    
         echo $result['portname'];
         $connect = $result['connect']; 
         $portLimit = 3; 
-
         if ($connect >= $portLimit) {
             $errorMessage = 'Port is busy';
             $errorId = 'errorMsg' . $result['portname']; 
@@ -55,9 +50,7 @@ while ($result=mysqli_fetch_array($sql)) {
         } 
     ?>
 </td>
-
     <td><?php echo $result['type']; ?></td>
-
         <?php
         $idd = $result['id'];
         $host = "localhost"; 
@@ -74,16 +67,12 @@ while ($result=mysqli_fetch_array($sql)) {
       
         <?php
         $id = $_SESSION['id'];
-
         $connect = $result['connect']; 
         $portLimit = 3; 
         $enableValue = $result['enable' . $id];
-
         if ($connect >= $portLimit || $enableValue == '') {
-           
             echo '<td class="py-1 px-2">  <input type="button" class="button" value="Connect" disabled></td>';
         } else {
-         
             echo '<td class="py-1 px-2">  <input type="submit" class="button" id="startButton'.$i.'" name="save" value="Connect"></td>';
             $i++; 
         }
@@ -94,38 +83,8 @@ while ($result=mysqli_fetch_array($sql)) {
 
     </table>
     <br>
-
     <script type="text/javascript">
-        var canvasVisible = false;
-        var ws;
-        var player;
-        var appJsSocket;
-        var fullScreenMode = false;
-    <?php for ($j = 0; $j < $i; $j++) { ?>
-    document.getElementById("startButton<?php echo $j; ?>").addEventListener("click", function() {
-        if (!canvasVisible) {
-            document.forms["form<?php echo $j; ?>"].submit();
-        }
-    });
-    <?php } ?>
-
-    function closeCanvas() {
-    document.getElementById("remoteVideos").style.display = "none";
-    canvasVisible = false;
-
-    if (player) {
-        player.stop();
-    }
-
-    if (ws && ws.readyState === WebSocket.OPEN) {
-        ws.close();
-    }
-
-    window.close();
-    window.location.href = "onlyuser.php";
-}
-
-     function decrementConnectNumber() {
+    function decrementConnectNumber() {
     var xhr = new XMLHttpRequest();
     var url = 'decrement_connect_count.php';
     var params = 'portname=<?php echo $portname; ?>&id=<?php echo $id; ?>';
@@ -143,7 +102,6 @@ while ($result=mysqli_fetch_array($sql)) {
 
     xhr.send(params);
 }
-
 </script>
 <?php 
 require_once 'onlyuserfooter.php';
