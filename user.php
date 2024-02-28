@@ -83,12 +83,13 @@ while ($result=mysqli_fetch_array($sql)) {
         $portLimit = 3; 
         $enableValue = $result['enable' . $id];
 
-        if ($connect >= $portLimit || $enableValue == '')   
-            echo '<td class="py-1 px-2">  <input type="button" class="button" value="Connect" disabled></td>';
-        } else {
-            echo '<td class="py-1 px-2">  <input type="submit" class="button" id="startButton'.$i.'" name="save" value="Connect"></td>';
-            $i++; 
-        }
+        if ($connect >= $portLimit || $enableValue == '') {
+          
+        echo '<td class="py-1 px-2">  <input type="button" class="button" value="Connect" disabled></td>';
+    } else {
+        echo '<td class="py-1 px-2">  <input type="button" class="button connectButton" value="Connect"></td>';
+    }
+        
         ?>
     </tr>
     </form>
@@ -96,8 +97,18 @@ while ($result=mysqli_fetch_array($sql)) {
 
     </table>
     <br>
+
     <script type="text/javascript">
-    function decrementConnectNumber() {
+       
+var connectButtons = document.getElementsByClassName("connectButton");
+for (var i = 0; i < connectButtons.length; i++) {
+    connectButtons[i].addEventListener("click", function() {
+        // Redirect to index.html
+        window.location.href = "index.html";
+    });
+}   
+
+     function decrementConnectNumber() {
     var xhr = new XMLHttpRequest();
     var url = 'decrement_connect_count.php';
     var params = 'portname=<?php echo $portname; ?>&id=<?php echo $id; ?>';
@@ -115,6 +126,7 @@ while ($result=mysqli_fetch_array($sql)) {
 
     xhr.send(params);
 }
+
 </script>
 <?php 
 require_once 'userfooter.php';
