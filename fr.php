@@ -139,6 +139,7 @@ $lang = array(
 'I7' => 'Autorité portuaire',
 'I8' => 'Résolution',
 'I9' => 'Commutateur KVM',
+'I10' => 'Fréquence dimages',
 'N1' => 'Mise à jour',
 'N2' => 'Entrez le nom complet',
 'O1' => 'Sélection dentrée',
