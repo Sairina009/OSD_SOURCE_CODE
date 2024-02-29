@@ -1,8 +1,12 @@
 <?php  
 session_start(); 
-require_once 'en.php';
-//include 'caps.html';
-//include 'key.html';
+if (isset($_GET['la'])) {
+    $_SESSION['la'] = $_GET['la']; 
+    header('Location:'.$_SERVER['PHP_SELF']); 
+    exit(); 
+} 
+$language = isset($_SESSION['language']) ? $_SESSION['language'] : 'en';
+require_once($language . '.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,9 +76,6 @@ require_once 'en.php';
 
     <header class="header" style="background-color: floralwhite;font-size: medium;">
     <?php require_once 'DBConnection.php'; $fetchdata=new DB_con(); $sql=$fetchdata->kvmdata(); $row=mysqli_fetch_array($sql); 
-//echo $caps=$row['hotkey'];
-//exit;
-//$capsLockActive = isset($_SESSION['capsLockActive']) ? $_SESSION['capsLockActive'] : false;
 if ($row['hotkey'] == '< Caps Lock>') {
     include 'caps.html';
 } elseif($row['hotkey'] == '< Ctrl>'){
@@ -83,7 +84,6 @@ if ($row['hotkey'] == '< Caps Lock>') {
 else{
     echo 'scroll';
 }
-
 ?>
     <div class="container-fluid"
         style="margin-top: 10px;margin-left: 5px;border:2px solid black;padding: 2px;height: 1060px;width: 1900px;">
