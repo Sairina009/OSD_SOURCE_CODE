@@ -3,13 +3,6 @@ require_once "DBConnection.php";
 $updatedata=new DB_con(); 
 $sql=$updatedata->german(); 
 $lang = array(
-  'welcome_message' => 'justin!',
-  'X1'=> 'KVM-Anmeldung',
-  'X2' =>'Melden Sie sich mit Benutzername und Passwort an',
-    'X3' => 'Nutzername',
-    'X4' => 'Passwort',
-    'X5' => 'Anmeldung',
-
 'AA1' => 'Englisch',
 'AA2' => 'Französisch',
 'AA3' => 'Deutsch',
