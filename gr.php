@@ -134,6 +134,7 @@ $lang = array(
 'I7' => 'Hafenbehörde',
 'I8' => 'Auflösung',
 'I9' => 'KVM-Switch',
+'I10' => 'Bildrate',
 'N1' => 'Aktualisieren',
 'N2' => 'Geben Sie den vollständigen Namen ein',
 'O1' => 'Eingangsauswahl',
