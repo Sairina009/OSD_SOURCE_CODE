@@ -72,6 +72,7 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
    3. Able Update Username and Enable or Disable user.
    4. Able to give Admin or User authority to users.
    5. Hotkey function with Ctrl key.
+   6. Banner display when Port is busy.
 
 **Known Issues:**
    
