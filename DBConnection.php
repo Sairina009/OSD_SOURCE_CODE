@@ -24,117 +24,109 @@ Class DB_con
     {
          $this->conn->close();
     }
-    public function logindata($username , $password)  
-    {
-        
-        $result=mysqli_query($this->conn, "SELECT * from username WHERE username ='$username' and password='$password'");
-        $result3=mysqli_query($this->conn, "SELECT * FROM `portname`");
-        $result1=mysqli_fetch_object($result);
-        $result2=mysqli_fetch_object($result3);
+       public function logindata($username, $password) {
+        $result = mysqli_query($this->conn, "SELECT * FROM username WHERE username ='$username' AND password='$password'");
+        $result1 = mysqli_fetch_object($result);
+        $result3 = mysqli_query($this->conn, "SELECT * FROM `portname`");
+        $result2 = mysqli_fetch_object($result3);
         $count = mysqli_num_rows($result);
-
-        if($count > 0 ) { 
-        if ($username && $password && $result1->active=='1'&&$result1->authority=='Admin'&&$result1->view=='OFF'&& $result1->id) {
-            $id = $result1->id;
-           
-            $result4=mysqli_query($this->conn, "INSERT INTO `logs` (`user_id`,`action_made`,`event`) VALUES ('$id','Logged in','Access Login')");
-            $_SESSION['id']=$result1->id;$_SESSION['username']=$result1->username;
-            $_SESSION['p1']=$result2->scan1;$_SESSION['scan2']=$result2->scan2;$_SESSION['scan3']=$result2->scan3;$_SESSION['scan4']=$result2->scan4;
-             $_SESSION['scan5']=$result2->scan5;$_SESSION['scan6']=$result2->scan6;$_SESSION['scan7']=$result2->scan7;$_SESSION['scan8']=$result2->scan8;
-             $_SESSION['scan9']=$result2->scan9;$_SESSION['scan10']=$result2->scan10;$_SESSION['scan11']=$result2->scan11;$_SESSION['scan12']=$result2->scan12;
-             $_SESSION['scan13']=$result2->scan13;$_SESSION['scan14']=$result2->scan14;$_SESSION['scan15']=$result2->scan15;$_SESSION['scan16']=$result2->scan16;
-             $_SESSION['enable1']=$result2->enable1;$_SESSION['enable2']=$result2->enable2;$_SESSION['enable3']=$result2->enable3;
-             $_SESSION['enable4']=$result2->enable4;$_SESSION['enable5']=$result2->enable5;$_SESSION['enable6']=$result2->enable6;
-             $_SESSION['enable7']=$result2->enable7;$_SESSION['enable8']=$result2->enable8;$_SESSION['enable9']=$result2->enable9;
-             $_SESSION['enable10']=$result2->enable10;$_SESSION['enable11']=$result2->enable11;$_SESSION['enable12']=$result2->enable12;
-             $_SESSION['enable13']=$result2->enable13;$_SESSION['enable14']=$result2->enable14;$_SESSION['enable15']=$result2->enable15;
-             $_SESSION['enable16']=$result2->enable16;
-             
-             $_SESSION['a1']=$result2->a1;$_SESSION['a2']=$result2->a2;$_SESSION['a3']=$result2->a3;$_SESSION['a4']=$result2->a4;$_SESSION['a5']=$result2->a5;$_SESSION['a6']=$result2->a6;$_SESSION['a7']=$result2->a7;$_SESSION['a8']=$result2->a8;$_SESSION['a9']=$result2->a9;$_SESSION['a10']=$result2->a10;$_SESSION['a11']=$result2->a11;$_SESSION['a12']=$result2->a12;$_SESSION['a13']=$result2->a13;$_SESSION['a14']=$result2->a14;$_SESSION['a15']=$result2->a15;$_SESSION['a16']=$result2->a16;header("location:user.php");
-                   
-             }
-                 else if ($username && $password && $result1->active=='1'&&$result1->authority=='Admin'&&$result1->view=='ON'&& $result1->id) {
-                     $id = $result2->id;
-                     $result4=mysqli_query($this->conn, "INSERT INTO `logs` (`user_id`,`action_made`,`event`) VALUES ('$id','Logged in','Access Login')");
-           $_SESSION['id']=$result1->id;$_SESSION['username']=$result1->username;
-                     $_SESSION['scan1']=$result2->scan1;$_SESSION['scan2']=$result2->scan2;$_SESSION['scan3']=$result2->scan3;
-                          $_SESSION['scan4']=$result2->scan4;$_SESSION['scan5']=$result2->scan5;$_SESSION['scan6']=$result2->scan6;
-                          $_SESSION['scan7']=$result2->scan7;$_SESSION['scan8']=$result2->scan8;$_SESSION['scan9']=$result2->scan9;
-                          $_SESSION['scan10']=$result2->scan10;$_SESSION['scan11']=$result2->scan11;$_SESSION['scan12']=$result2->scan12;
-                          $_SESSION['scan13']=$result2->scan13;$_SESSION['scan14']=$result2->scan14;$_SESSION['scan15']=$result2->scan15;
-                          $_SESSION['scan16']=$result2->scan16;
-                          $_SESSION['enable1']=$result2->enable1;$_SESSION['enable2']=$result2->enable2;$_SESSION['enable3']=$result2->enable3;
-                          $_SESSION['enable4']=$result2->enable4;$_SESSION['enable5']=$result2->enable5;$_SESSION['enable6']=$result2->enable6;
-                          $_SESSION['enable7']=$result2->enable7;$_SESSION['enable8']=$result2->enable8;$_SESSION['enable9']=$result2->enable9;
-                          $_SESSION['enable10']=$result2->enable10;$_SESSION['enable11']=$result2->enable11;$_SESSION['enable12']=$result2->enable12;
-                          $_SESSION['enable13']=$result2->enable13;$_SESSION['enable14']=$result2->enable14;$_SESSION['enable15']=$result2->enable15;
-                          $_SESSION['enable16']=$result2->enable16;
-      $_SESSION['a1']=$result2->a1;$_SESSION['a2']=$result2->a2;$_SESSION['a3']=$result2->a3;$_SESSION['a4']=$result2->a4;$_SESSION['a5']=$result2->a5;$_SESSION['a6']=$result2->a6;$_SESSION['a7']=$result2->a7;$_SESSION['a8']=$result2->a8;$_SESSION['a9']=$result2->a9;$_SESSION['a10']=$result2->a10;$_SESSION['a11']=$result2->a11;$_SESSION['a12']=$result2->a12;$_SESSION['a13']=$result2->a13;$_SESSION['a14']=$result2->a14;$_SESSION['a15']=$result2->a15;$_SESSION['a16']=$result2->a16;header("location:demo.php");
-                 }
-                 else if ($username && $password &&  $result1->active=='1'&&$result1->authority=='User'&&$result1->view=='OFF'&& $result1->id) {
-                     $id = $result2->id;
-                     $result5=mysqli_query($this->conn, "INSERT INTO `logs` (`user_id`,`action_made`,`event`) VALUES ('$id','Logged in','Access Login')");
-                     $_SESSION['id']=$result1->id;$_SESSION['username']=$result1->username;
-                     $_SESSION['scan1']=$result2->scan1;$_SESSION['scan2']=$result2->scan2;$_SESSION['scan3']=$result2->scan3;
-                          $_SESSION['scan4']=$result2->scan4;$_SESSION['scan5']=$result2->scan5;$_SESSION['scan6']=$result2->scan6;
-                          $_SESSION['scan7']=$result2->scan7;$_SESSION['scan8']=$result2->scan8;$_SESSION['scan9']=$result2->scan9;
-                          $_SESSION['scan10']=$result2->scan10;$_SESSION['scan11']=$result2->scan11;$_SESSION['scan12']=$result2->scan12;
-                          $_SESSION['scan13']=$result2->scan13;$_SESSION['scan14']=$result2->scan14;$_SESSION['scan15']=$result2->scan15;
-                          $_SESSION['scan16']=$result2->scan16;
-                          $_SESSION['enable1']=$result2->enable1;$_SESSION['enable2']=$result2->enable2;$_SESSION['enable3']=$result2->enable3;
-                          $_SESSION['enable4']=$result2->enable4;$_SESSION['enable5']=$result2->enable5;$_SESSION['enable6']=$result2->enable6;
-                          $_SESSION['enable7']=$result2->enable7;$_SESSION['enable8']=$result2->enable8;$_SESSION['enable9']=$result2->enable9;
-                          $_SESSION['enable10']=$result2->enable10;$_SESSION['enable11']=$result2->enable11;$_SESSION['enable12']=$result2->enable12;
-                          $_SESSION['enable13']=$result2->enable13;$_SESSION['enable14']=$result2->enable14;$_SESSION['enable15']=$result2->enable15;
-                          $_SESSION['enable16']=$result2->enable16;
-                          $_SESSION['a1']=$result2->a1;$_SESSION['a2']=$result2->a2;$_SESSION['a3']=$result2->a3;$_SESSION['a4']=$result2->a4;$_SESSION['a5']=$result2->a5;$_SESSION['a6']=$result2->a6;$_SESSION['a7']=$result2->a7;$_SESSION['a8']=$result2->a8;$_SESSION['a9']=$result2->a9;$_SESSION['a10']=$result2->a10;$_SESSION['a11']=$result2->a11;$_SESSION['a12']=$result2->a12;$_SESSION['a13']=$result2->a13;$_SESSION['a14']=$result2->a14;$_SESSION['a15']=$result2->a15;$_SESSION['a16']=$result2->a16;header("location:onlyuser.php");
-                                 }
-                 else if ($username && $password && $result1->active=='1'&&$result1->authority=='User'&&$result1->view=='ON'&&  $result1->id) {
-                    $id = $result2->id;
-                    $result6=mysqli_query($this->conn, "INSERT INTO `logs` (`user_id`,`action_made`,`event`) VALUES ('$id','Logged in','Access Login')");
-                   
-                    $_SESSION['id']=$result1->id;$_SESSION['username']=$result1->username;
-                    $_SESSION['scan1']=$result2->scan1;$_SESSION['scan2']=$result2->scan2;$_SESSION['scan3']=$result2->scan3;
-                         $_SESSION['scan4']=$result2->scan4;$_SESSION['scan5']=$result2->scan5;$_SESSION['scan6']=$result2->scan6;
-                         $_SESSION['scan7']=$result2->scan7;$_SESSION['scan8']=$result2->scan8;$_SESSION['scan9']=$result2->scan9;
-                         $_SESSION['scan10']=$result2->scan10;$_SESSION['scan11']=$result2->scan11;$_SESSION['scan12']=$result2->scan12;
-                         $_SESSION['scan13']=$result2->scan13;$_SESSION['scan14']=$result2->scan14;$_SESSION['scan15']=$result2->scan15;
-                         $_SESSION['scan16']=$result2->scan16;
-                         $_SESSION['enable1']=$result2->enable1;$_SESSION['enable2']=$result2->enable2;$_SESSION['enable3']=$result2->enable3;
-                         $_SESSION['enable4']=$result2->enable4;$_SESSION['enable5']=$result2->enable5;$_SESSION['enable6']=$result2->enable6;
-                         $_SESSION['enable7']=$result2->enable7;$_SESSION['enable8']=$result2->enable8;$_SESSION['enable9']=$result2->enable9;
-                         $_SESSION['enable10']=$result2->enable10;$_SESSION['enable11']=$result2->enable11;$_SESSION['enable12']=$result2->enable12;
-                         $_SESSION['enable13']=$result2->enable13;$_SESSION['enable14']=$result2->enable14;$_SESSION['enable15']=$result2->enable15;
-                         $_SESSION['enable16']=$result2->enable16;
-                         $_SESSION['a1']=$result2->a1;$_SESSION['a2']=$result2->a2;$_SESSION['a3']=$result2->a3;$_SESSION['a4']=$result2->a4;$_SESSION['a5']=$result2->a5;$_SESSION['a6']=$result2->a6;$_SESSION['a7']=$result2->a7;$_SESSION['a8']=$result2->a8;$_SESSION['a9']=$result2->a9;$_SESSION['a10']=$result2->a10;$_SESSION['a11']=$result2->a11;$_SESSION['a12']=$result2->a12;$_SESSION['a13']=$result2->a13;$_SESSION['a14']=$result2->a14;$_SESSION['a15']=$result2->a15;$_SESSION['a16']=$result2->a16;header("location:userdemo.php");
-                                }
-                      
-            else if ($username && $password && $result1->active=='0' && $result1->authority=='Admin' && $result1->id) {
-            
-            header("location: index.php");
-            $error=" Account Invalid ";
-            }    
-            else if ($username && $password && $result1->active=='0' && $result1->authority=='User' && $result1->id) {
-            $error="Account Invalid";
-            header("location: index.php");
-               
-             }   
-              
-             }
-        else { 
-             $error="Invalid Username and Password";
-         } 
+        if ($count > 0) { 
+            if ($result1->active == '1' && $result1->id) {
+                // Set session variables
+                $_SESSION['id'] = $result1->id;
+                $_SESSION['username'] = $result1->username;
+                $active_decoders_count = mysqli_num_rows(mysqli_query($this->conn, "SELECT * FROM decoder_status WHERE user_id IS NOT NULL"));
                 
-         return $error;
-         return $result1; 
-         return $result2;
-         return $result4;
-         return $result5;
-         return $result3;
-         return $result6;
-        
+                if ($active_decoders_count < 4) {
+                    // Log in the user directly
+                    $this->logUserIn($result1->id, $result1->id); 
+                   
+                    $_SESSION['authority'] = $result1->authority;
+                    $_SESSION['view'] = $result1->view;
+                    $_SESSION['enable1'] = $result2->enable1;
+                    $_SESSION['enable2'] = $result2->enable2;
+                    $_SESSION['enable3'] = $result2->enable3;
+                    $_SESSION['enable4'] = $result2->enable4;
+                    $_SESSION['enable5'] = $result2->enable5;
+                    $_SESSION['enable6'] = $result2->enable6;
+                    $_SESSION['enable7'] = $result2->enable7;
+                    $_SESSION['enable8'] = $result2->enable8;
+                    $_SESSION['enable9'] = $result2->enable9;
+                    $_SESSION['enable10'] = $result2->enable10;
+                    $_SESSION['enable11'] = $result2->enable11;
+                    $_SESSION['enable12'] = $result2->enable12;
+                    $_SESSION['enable13'] = $result2->enable13;
+                    $_SESSION['enable14'] = $result2->enable14;
+                    $_SESSION['enable15'] = $result2->enable15;
+                    $_SESSION['enable16'] = $result2->enable16;
+
+             
+                    if ($result1->authority == 'Admin') {
+                        if ($result1->view == 'OFF') {
+                            header("location: user.php");
+                        } else {
+                            header("location: demo.php");
+                        }
+                    } elseif ($result1->authority == 'User') {
+                        if ($result1->view == 'OFF') {
+                            header("location: onlyuser.php");
+                        } else {
+                            header("location: userdemo.php");
+                        }
+                    }
+                } else {
+                    // Add user to waiting list
+                    $this->addToWaitingList($result1);
+                    $error = "Maximum number of active sessions reached. You have been added to the waiting list.";
+                    
+                    return $error;
+                }
+            } else {
+                $error = "Invalid Username and Password";
+                
+                return $error;
+            } 
+        } else {
+            $error = "Invalid Username and Password";
+       
+            return $error;
+        }
     }
-    public function audit()
+
+    public function logUserIn($decoder_id, $user_id) {
+        $login_time = date("Y-m-d H:i:s");
+        $query = "INSERT INTO decoder_status (decoder_id, user_id, login_time) VALUES ('$decoder_id', '$user_id', '$login_time')";
+        mysqli_query($this->conn, $query);
+
+         $log['action_made'] = "Logged in.";
+    $log['event'] = "Access Login";
+    $this->save_log($log);
+}
+
+private function save_log($data = array()) {
+    if (count($data) > 0) {
+        extract($data);
+        if(isset($_SESSION['id'])) {
+            $log['user_id'] = $_SESSION['id'];
+        } else {
+            $log['user_id'] = ''; 
+        }
+        $log['action_made'] = $action_made;
+        $log['event'] = $event;
+        $sql = "INSERT INTO `logs` (`user_id`,`action_made`,`event`) VALUES ('{$log['user_id']}','{$log['action_made']}','{$log['event']}')";
+        $save = $this->conn->query($sql);
+        if (!$save) {
+            die($sql . " <br> ERROR:" . $this->conn->error);
+        }
+    }
+    return true;
+}
+    private function addToWaitingList($user) {
+        // Add user to waiting list
+        $login_time = date("Y-m-d H:i:s");
+        mysqli_query($this->conn, "INSERT INTO waiting_list (user_id, login_time) VALUES ('$user->id', '$login_time')"); // Fix accessing object properties
+    }
+   public function audit()
     {
         $per_page_record = 15;        
         if (isset($_GET["page"])) {    
