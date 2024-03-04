@@ -1,78 +1,136 @@
-<?php 
+<?php
 session_start();
 require_once 'DBConnection.php';
-Class Actions extends DB_con
-{
-    function __construct()
-    {
+
+class Actions extends DB_con {
+    function __construct() {
         parent::__construct();
     }
-    function __destruct()
-    {
+
+    function __destruct() {
         parent::__destruct();
     }
-    function save_log($data=array())
-    {
+
+    function save_log($data = array()) {
         if (count($data) > 0) {
             extract($data);
-            $log['user_id'] = $_SESSION['id'];
-        $log['action_made'] = "Logged in.";
-        $log['event']="Access Login";
-            $sql = "INSERT INTO `logs` (`user_id`,`action_made`,`event`) VALUES ('{$user_id}','{$action_made}','{$event}')";
+            if(isset($_SESSION['id'])) {
+                $log['user_id'] = $_SESSION['id'];
+            } else {
+                $log['user_id'] = ''; 
+            }
+            $log['action_made'] = $action_made;
+            $log['event'] = $event;
+            $sql = "INSERT INTO `logs` (`user_id`,`action_made`,`event`) VALUES ('{$log['user_id']}','{$log['action_made']}','{$log['event']}')";
             $save = $this->conn->query($sql);
             if (!$save) {
-                die($sql." <br> ERROR:".$this->conn->error);
+                die($sql . " <br> ERROR:" . $this->conn->error);
             }
         }
         return true;
     }
-    function login()
-    {
-        extract($_POST);
-        $username=$_POST['username'];
-        $password=$_POST['password'];
-        $sql = "SELECT id , username , password FROM username where username = '{$username}' and `password` = '".($password)."' ";
-        @$qry = $this->conn->query($sql)->fetch_array();
-        if (!$qry) {
-            $resp['status'] = "failed";
-            $resp['msg'] = "Invalid username or password.";
-        } else {
-            $resp['status'] = "success";
-            $resp['msg'] = "Login successfully.";
-        }
-        return json_encode($resp);
-    }
-    function logout()
-    {
-        $log['user_id'] = $_SESSION['id'];
-        $log['action_made'] = "Logged out.";
-        $log['event']="Access Logout";
-        $ipAddress = $_SERVER['REMOTE_ADDR'];
 
-       
-        session_destroy();
-        // audit log
+    function login() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            // Sanitize and validate input parameters
+            $username = mysqli_real_escape_string($this->conn, $username);
+            $password = mysqli_real_escape_string($this->conn, $password);
+
+            // Query to fetch user details
+            $query = "SELECT * FROM username WHERE username = '$username'";
+            $result = mysqli_query($this->conn, $query);
+
+            if ($result && mysqli_num_rows($result) > 0) {
+                $user = mysqli_fetch_assoc($result);
+                // Verify password
+                if (password_verify($password, $user['password'])) {
+                    // Set session variables
+                    $_SESSION['id'] = $user['id'];
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['authority'] = $user['authority'];
+                    $_SESSION['view'] = $user['view'];
+
+                    // Log the login action
+                    $this->save_log(['action_made' => 'Logged in', 'event' => 'Access Login']);
+
+                    // Redirect to appropriate page
+                    if ($user['authority'] == 'Admin') {
+                        header("location: " . ($user['view'] == 'OFF' ? 'user.php' : 'demo.php'));
+                    } elseif ($user['authority'] == 'User') {
+                        header("location: " . ($user['view'] == 'OFF' ? 'onlyuser.php' : 'userdemo.php'));
+                    }
+                } else {
+                    $error = "Invalid username or password.";
+                    header("location: index.php?error=$error");
+                }
+            } else {
+                $error = "Invalid username or password.";
+                header("location: index.php?error=$error");
+            }
+        }
+
+        $log['action_made'] = "Logged in.";
+        $log['event'] = "Access Login";
         $this->save_log($log);
+    }
+
+   function logout($user_id = '') {
+        if(empty($user_id)) {
+            if(isset($_SESSION['id'])) {
+                $user_id = $_SESSION['id'];
+            } else {
+                $user_id = ''; 
+            }
+        }
+
+        $sql_delete = "DELETE FROM decoder_status WHERE user_id = '{$user_id}'";
+        $delete_result = $this->conn->query($sql_delete);
+        if (!$delete_result) {
+            die("Error deleting user from decoder_status table: " . $this->conn->error);
+        }
+
+        $sql_reorder = "SET @count = 0";
+        $this->conn->query($sql_reorder);
+
+        $sql_update = "UPDATE decoder_status SET id = @count:= @count + 1";
+        $update_result = $this->conn->query($sql_update);
+        if (!$update_result) {
+            die("Error updating IDs in decoder_status table: " . $this->conn->error);
+        }
+
+        $sql_reset_auto_increment = "ALTER TABLE decoder_status AUTO_INCREMENT = 1";
+        $reset_result = $this->conn->query($sql_reset_auto_increment);
+        if (!$reset_result) {
+            die("Error resetting auto-increment value for decoder_status table: " . $this->conn->error);
+        }
+
+        // Audit log
+        $log['action_made'] = "Logged out.";
+        $log['event'] = "Access Logout";
+        $this->save_log($log);
+        session_destroy();
         header("location:index.php");
     }
+
 }
-$a = isset($_GET['a']) ?$_GET['a'] : '';
+
+$a = isset($_GET['a']) ? $_GET['a'] : '';
 $action = new Actions();
-switch($a){
-case 'login':
-    echo $action->login();
-    break;
-case 'logout':
-    echo $action->logout();
-    break;
-case 'save_log':
-    $log['user_id'] = $_SESSION['id'];
-    $log['action_made'] = $_POST['action_made'];
-    $log['event'] = $_POST['event'];
-    echo $action->save_log($log);
-    break;
-default:
-    echo "No Action given";
-    break;
+switch ($a) {
+    case 'login':
+        echo $action->login();
+        break;
+    case 'logout':
+        echo $action->logout();
+        break;
+    case 'save_log':
+        // Save log logic...
+        break;
+    default:
+        echo "No Action given";
+        break;
 }
 ?>
