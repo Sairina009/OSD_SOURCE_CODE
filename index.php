@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 //$language = isset($_SESSION['language']) ? $_SESSION['language'] : 'en';
 require_once 'en.php';
-include 'DBConnection.php';
+require_once 'DBConnection.php';
 $updatedata=new DB_con(); 
 session_start();
 $error="";
