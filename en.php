@@ -1,7 +1,7 @@
 <?php
-//require_once "DBConnection.php";
-//$updatedata=new DB_con(); 
-//$sql=$updatedata->english(); 
+require_once "DBConnection.php";
+$updatedata=new DB_con(); 
+$sql=$updatedata->english(); 
 $lang = array(
   'AA1' => 'English',
 'AA2' => 'French',
