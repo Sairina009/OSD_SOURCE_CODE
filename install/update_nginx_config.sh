@@ -10,12 +10,12 @@ server {
     listen [::]:80 default_server;
 
     root /var/www/html/;
-    index index.php index.html index.htm index.nginx-debian.html;
+    index index.html index.htm index.nginx-debian.html;
     server_name _;
 
     location / {
         # Existing configuration for serving static files
-        # try_files \$uri \$uri/ =404;
+        # try_files $uri $uri/ =404;
         # proxy_pass http://localhost:8080;
     }
     
@@ -27,23 +27,26 @@ server {
     location /rtsp-server {
         # Configuration for serving RTSP content
         # Add your RTSP server configuration here
-        try_files \$uri \$uri/ =404;
+        try_files $uri $uri/ =404;
     }
 
     location /od {
         # Configuration for handling PHP requests
-        try_files \$uri \$uri/ /php/index.php\$is_args\$args;
+        try_files $uri $uri/ /od/php/index.php$is_args$args;
 
         location ~ \.php$ {
             include snippets/fastcgi-php.conf;
             fastcgi_pass unix:/run/php/php7.4-fpm.sock;
-            fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
         }
     }
 
-    location ~ /\.ht {
-        deny all;
+    location /od/css/usercss {
+        # Configuration for serving CSS files
+        types {
+            text/css css;
+        }
     }
 }
 "
