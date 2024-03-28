@@ -4,7 +4,7 @@ require_once 'DBConnection.php';
 $updatedata=new DB_con(); 
 if (isset($_POST['id'])) { 
     $submit =" ";
-    for ($u=1 ; $u<=8; $u++) {
+    for ($u=1 ; $u<=32; $u++) {
         if (isset($_POST['submit' . $u])) {
             $submit = $_POST['submit' . $u]; 
         }
