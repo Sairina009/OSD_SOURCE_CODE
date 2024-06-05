@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./public/style.css">
+    <title>KVM Remote Decoder</title>
+    <style>
+        #remoteVideos {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Style for the textbox */
+        #textbox {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 2; 
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h3>KVM REMOTE DECODER</h3>
+        <ul style="position: absolute;right: 30px;">
+       
+            <li style="display: inline-flex; padding: 0px 10px 0px 10px;">
+                <button id="closeBtn">Close</button>
+            </li>
+        </ul>
+    </div>
+
+    <div class="page-content container">
+        <div id="remoteVideos" oncontextmenu="return false;">
+            <canvas class="camera" id="videoCanvas" style="width: 100%;"></canvas>
+            <audio id="audioElement" autoplay></audio>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./public/jsmpeg.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var ws; 
+
+        $(document).ready(function() {
+            var params = new URLSearchParams(window.location.search);
+            var id = params.get('id');
+
+            if (id !== null) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'check_authority.php', true);
+                xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = xhr.responseText;
+                        console.log("Response from check_authority.php:", response);
+                        var data = JSON.parse(response);
+                        var authority = data.authority;
+                        var view_only = data.view_only;
+                        var ip_address = data.ip_address;
+                        var decoder_ip = data.decoder_ip;
+
+                        if (view_only === "0" && authority === "Share") {
+                            console.log("Allowing all elements and events.");
+                            allowAllEvents(ip_address);
+                        } else {
+                            console.log("Blocking keyboard, mouse, and scroll events.");
+                            document.addEventListener('keydown', blockKeyboardEvents, true);
+                            document.addEventListener('keyup', blockKeyboardEvents, true);
+                            document.addEventListener('keypress', blockKeyboardEvents, true);
+                            document.addEventListener('mousedown', blockMouseEvents, true);
+                            document.addEventListener('mouseup', blockMouseEvents, true);
+                            document.addEventListener('mousemove', blockMouseEvents, true);
+                            document.addEventListener('click', blockMouseEvents, true);
+                            document.addEventListener('wheel', blockScrollEvents, { passive: false });
+                        }
+                    }
+                };
+                xhr.send('id=' + id);
+            } else {
+                console.error("Decoder ID not provided");
+            }
+        });
+
+        function blockKeyboardEvents(event) {
+            console.log("Keyboard events are blocked.");
+            console.log("Key pressed: " + event.key);
+            event.preventDefault();
+        }
+
+        function blockMouseEvents(event) {
+            console.log("Mouse events are blocked.");
+            event.preventDefault();
+        }
+
+        function blockScrollEvents(event) {
+            console.log("Scroll events are blocked.");
+            event.preventDefault();
+        }
+
+       // Function to allow keyboard, mouse, and scroll events
+function allowAllEvents(ip_address) { // Accept IP Address as parameter
+    // Remove event listeners for blocking events
+    document.removeEventListener('keydown', blockKeyboardEvents, true);
+    document.removeEventListener('keyup', blockKeyboardEvents, true);
+    document.removeEventListener('keypress', blockKeyboardEvents, true);
+    document.removeEventListener('mousedown', blockMouseEvents, true);
+    document.removeEventListener('mouseup', blockMouseEvents, true);
+    document.removeEventListener('mousemove', blockMouseEvents, true);
+    document.removeEventListener('click', blockMouseEvents, true);
+    document.removeEventListener('wheel', blockScrollEvents, { passive: false });
+
+
+    var wsUrl = "ws://" + ip_address + ":9099";
+    console.log("WebSocket URL:", wsUrl);
+
+    // Establish the WebSocket connection
+    ws = new WebSocket(wsUrl);
+    ws.onopen = function(event) {
+        console.log('######### WebSocket is now connected ##########');
+        initializeJSMpeg();
+    };
+    ws.onclose = function(event) {
+        console.log('######### WebSocket is now closed ##########');
+    };
+    ws.onerror = function(error) {
+        console.error('WebSocket Error:', error);
+    };
+}
+
+function initializeJSMpeg() {
+    var canvas = document.getElementById('videoCanvas');
+    var player = new jsmpeg(ws, { canvas: canvas, autoplay: true, audio: true, loop: true });
+}
+
+        document.getElementById("closeBtn").onclick = function() {
+            var params = new URLSearchParams(window.location.search);
+            var id = params.get('id');
+            var decoder_id = params.get('decoder_id');
+            if (decoder_id !== null && id !== null) {
+                $.ajax({
+                    type: "POST",
+                    url: "remove_decoder.php", 
+                    data: { decoder_id: decoder_id, id: id }, 
+                    success: function(response) {
+                        console.log("Decoder removed successfully");
+                        window.close(); // Close the window
+                        window.history.back(); // Go back
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error removing decoder:", error);
+                    }
+                });
+            } else {
+                console.error("Decoder ID or ID not provided");
+            }
+        };
+    </script>
+</body>
+</html>
