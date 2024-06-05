@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Over IP KVM</title>
+    <link rel="stylesheet" href="css/usercss/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/usercss/bootstrap-reboot.css">
+    <link rel="stylesheet" href="css/usercss/bootstrap.css">
+    <link rel="stylesheet" href="css/usercss/bootstrap.min.css">
+    <link rel="stylesheet" href="css/usercss/bootstrap-grid.css.map">
+    <link rel="stylesheet" href="css/usercss/bootstrap-grid.min.css.map">
+    <link rel="stylesheet" href="css/usercss/bootstrap-reboot.css.map">
+    <link rel="stylesheet" href="css/usercss/bootstrap-reboot.min.css.map">
+    <link rel="stylesheet" href="css/usercss/bootstrap.css.map">
+    <link rel="stylesheet" href="css/usercss/bootstrap.min.css.map">
+
+    <style>
+        /* Your existing CSS styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header {
+            background-color: floralwhite;
+            font-size: medium;
+            padding: 10px; /* Added padding for spacing */
+        }
+
+        .nav-tabs .nav-link {
+            border: 2px solid darkgreen;
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
+            height: 45px;
+            text-align: center;
+            margin-left: 2px;
+            width: 170px;
+            font-size: medium;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 0.5rem 1rem;
+            background-color: gainsboro;
+        }
+
+        /* Adjustments for responsiveness */
+        @media only screen and (max-width: 768px) {
+            /* Adjustments for smaller screens */
+            .nav-tabs .nav-link {
+                width: 120px;
+            }
+        }
+
+        /* New styles for responsiveness */
+        @media only screen and (max-width: 1200px) {
+            /* Adjustments for medium-sized screens */
+            .container-fluid {
+                width: 90%; /* Adjust the container width for medium-sized screens */
+                margin: auto; /* Center the container horizontally */
+            }
+        }
+        .nav-tabs .active a {
+    color: black;
+    background: white;
+    
+}
+    </style>
+</head>
+<body>
+    <header class="header" style="background-color: floralwhite;font-size: medium;">
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="keyboard.min.js"></script>
+    <script>
+        var currentPort = getCurrentPort();
+        var keySequence = ''; // Variable to store the key sequence
+
+        function getCurrentPort() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var portParam = urlParams.get('port');
+            return portParam ? parseInt(portParam, 10) : 1;
+        }
+
+        function navigatePort(direction) {
+            if (direction === 'up' && currentPort < 32) {
+                currentPort++;
+            } else if (direction === 'down' && currentPort > 1) {
+                currentPort--;
+            }
+            updatePort();
+        }
+
+        function updatePort() {
+            window.location.href = 'port.php?port=' + currentPort;
+        }
+
+        function handleKeys(e) {
+            if (e.ctrlKey) {
+                if (e.key === '0') {
+                    // For Ctrl + 0, set the port to 10
+                    currentPort = 10;
+                } else if (e.key >= '1' && e.key <= '9') {
+                    // For Ctrl + 1 to Ctrl + 9, set the port accordingly
+                    currentPort = parseInt(e.key, 10);
+                } else if (e.key === 'ArrowUp' && currentPort < 32) {
+                    e.preventDefault();
+                    navigatePort('up');
+                } else if (e.key === 'ArrowDown' && currentPort > 1) {
+                    e.preventDefault();
+                    navigatePort('down');
+                }
+                updatePort();
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            handleKeys(e);
+        });
+
+        window.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.code.startsWith('Digit')) {
+                // Append the pressed digit to the key sequence
+                keySequence += event.key;
+
+                // If the key sequence length is 2, update the port
+                if (keySequence.length === 2) {
+                    var portNumber = parseInt(keySequence);
+                    if (!isNaN(portNumber) && portNumber >= 1 && portNumber <= 32) {
+                        window.location.href = 'port.php?port=' + portNumber;
+                        keySequence = ''; // Reset the key sequence
+                    }
+                }
+            }
+        });
+
+        window.addEventListener('keyup', function(event) {
+            if (event.ctrlKey && event.code === 'KeyV') {
+                window.location.href = 'demo.php';
+            }
+        });
+
+        window.addEventListener('keyup', function(event) {
+            if (event.ctrlKey && event.code === 'KeyS') {
+                event.preventDefault();
+                fetch('auto-scan.php')
+                    .then(response => response.text())
+                    .then(data => {
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+        });
+    </script>
+</head>
+</html>
+    <div class="container-fluid"
+        style="margin-top: 10px;margin-left: 5px;border:2px solid black;padding: 2px;height: 1060px;width: 1900px;">
+        <span style="background-color:whitesmoke;">&nbsp;Over IP KVM</span>
+        <div class="container-fluid"
+            style="word-spacing: 3px;width: -2px;padding-left: 43px;color: revert;font-size: 27px;font-family: monospace;margin-top: -19px;">
+            <h2><span style="background-color: lightgreen;font-size: 30px;font-family: times new roman;">
+                    2024 / 29 / 05 12 : 35</span>
+                <label style="margin-left: 300px;">
+                    <h1> <span style="background-color: lightpink;font-size: 55px; width: 200px;"> RACK1_KVM2024</span>
+                    </h1>
+                </label>
+                <label
+                    style="margin-left: 150px;font-size: 25px;word-spacing: -14px;width: auto;">User Name:</label><input
+                    type="text" value="Admin "
+                    style="background-color: lightgreen;width: 220px;text-align: center;">
+                <a href="Actions_audit.php?a=logout" class="btn btn-primary" value="Save" name="save"
+                    style="width: auto;margin-left: 160px;background-color:skyblue;height:4%;"> Logout</a>
+                <h4><label style="margin-left: 1220px;word-spacing: -8px;">Hotkey :< Ctrl>                    </label></h4>
+            </h2>
+        </div>
+ <ul class="nav nav-tabs" style="width: 1700px; height: 902px; overflow: hidden; margin-left: 25px;">
+                            <li class="nav-item active">
+                    <a class="nav-link" href="user.php">Port Access</a>
+                </li>
+                            <li class="nav-item ">
+                    <a class="nav-link" href="portname.php">Port Setting</a>
+                </li>
+                            <li class="nav-item ">
+                    <a class="nav-link" href="username.php">User Management</a>
+                </li>
+                            <li class="nav-item ">
+                    <a class="nav-link" href="kvmname.php">Kvm Setting</a>
+                </li>
+                            <li class="nav-item ">
+                    <a class="nav-link" href="kvmupgrade.php">Maintainance</a>
+                </li>
+                            <li class="nav-item ">
+                    <a class="nav-link" href="help.php">Help</a>
+                </li>
+                    </ul>
+        <div
+            style="border:1px solid black;padding: 2px;height: 853px;margin-top: -847px;width: 1870px;margin-left: 22px;">
+        </div>
+    </div>
+</header>
+</head>
+</html>
+
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset=UTF-8>
+    <meta http-equiv=X-UA-Compatible content="IE=edge">
+    <meta name=viewport content="width=device-width, initial-scale=1.0">
+    <title>Over IP KVM</title>
+    
+ <style>
+        
+        #remoteVideos {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+        #videoCanvas {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            height: 100%;
+        }
+        #closeButton {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+        <script type="text/javascript" src="/public/jsmpeg.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+    <table id=table cellpadding=2 cellspacing=0 border=3
+        style=line-height:3;width:70%;margin-left:89px;margin-top:-800px>
+        <tr style=height:40px;background-color:lightsteelblue>
+            <th style=text-align:center;width:65px>No</th>
+            <th style=text-align:center;width:70px>Scan</th>
+            <th style=text-align:center>Port Name</th>
+            <th style=text-align:center;width:128px>Type</th>
+            <th style=text-align:center;width:135px>PC On-Line</th>
+            <th style=text-align:center;width:130px>Connect</th>
+        </tr>
+            <form action="" method="post" name="form0" id="form0">
+        <tr align=center>
+            <td style="padding:10px">
+                <input type="hidden" name="id" value="1">
+                1            </td>
+           <td>
+    </td>
+
+            <td>
+                encoder1                                                                </td>
+            <td>HDMI-CIM</td>
+            <td>Yes</td> 
+            <td>
+                <input type="button" class="button" name="save" value="Connect" onclick="connectToIndex(1, 'Share', '0')" >
+            </td>
+        </tr>
+        <input type="hidden" name="portname" value="encoder1">
+      
+        <input type="hidden" id="ip_address_0" name="ip_address" value="1.168.1.1">
+
+        <input type="hidden" id="path_0" name="path" value="C:/xampp1/htdocs/kvm.sql"> 
+
+        <input type="hidden" id="decoder_id_0" name="decoder_id" value="4">
+       
+     <input type="hidden" id="decoder_ip_0" name="decoder_ip" value="192.168.1.1">
+
+    </form>
+        <form action="" method="post" name="form1" id="form1">
+        <tr align=center>
+            <td style="padding:10px">
+                <input type="hidden" name="id" value="2">
+                2            </td>
+           <td>
+    s</td>
+
+            <td>
+                encoder2                                                                </td>
+            <td>DP-CIM</td>
+            <td>Yes</td> 
+            <td>
+                <input type="button" class="button" name="save" value="Connect" onclick="connectToIndex(2, 'View', '1')" >
+            </td>
+        </tr>
+        <input type="hidden" name="portname" value="encoder2">
+      
+        <input type="hidden" id="ip_address_1" name="ip_address" value="2.168.1.1">
+
+        <input type="hidden" id="path_1" name="path" value="C:/xampp1/htdocs/check_authority.php"> 
+
+        <input type="hidden" id="decoder_id_1" name="decoder_id" value="4">
+       
+     <input type="hidden" id="decoder_ip_1" name="decoder_ip" value="192.168.1.1">
+
+    </form>
+    
+</table>
+<br>
+<script type="text/javascript">
+function connectToIndex(id, authority, index) {
+    console.log("Button clicked with id: " + id + ", authority: " + authority); 
+
+    var ip_address = document.getElementById('ip_address_' + index).value;
+    console.log("IP Address:", ip_address);
+
+    var decoder_id = document.getElementById('decoder_id_' + index).value;
+    console.log("Decoder ID:", decoder_id);
+
+   var decoder_ip = document.getElementById('decoder_ip_' + index).value;
+console.log("Decoder IP:", decoder_ip);
+
+    var path = document.getElementById('path_' + index).value;
+    console.log("Path:", path);
+
+    updateDatabase(id, decoder_id, ip_address, path, decoder_ip);
+}
+
+// Function to update data in the database
+function updateDatabase(id, decoder_id, ip_address, path, decoder_ip) {
+    var data = new FormData();
+    data.append('id', id); // 
+    data.append('decoder_id', decoder_id);
+    data.append('ip_address', ip_address);
+    data.append('decoder_ip', decoder_ip);
+    data.append('path', path); 
+    data.append('save', 'true'); 
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'uheader.php', true); 
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = xhr.responseText;
+            console.log("Response from uheader.php:", response);
+            // Database updated, now update JSON
+            updateDefaultJson(ip_address, '/home/user/Desktop/LINUX_PACKAGE_INSTALLER/rtsp-stream/config/default.json', id, decoder_id, path, decoder_ip);
+        }
+    };
+    xhr.send(data);
+}
+
+function updateDefaultJson(ip_address, file_path, id, decoder_id, path, decoder_ip) {
+    var xhr_json = new XMLHttpRequest();
+    xhr_json.open('GET', file_path, true);
+    xhr_json.onreadystatechange = function () {
+        if (xhr_json.readyState === 4) {
+            if (xhr_json.status === 200) {
+                console.log("Response from server:", xhr_json.responseText);
+                try {
+                    var default_json = JSON.parse(xhr_json.responseText);
+                    default_json.server.uri = "rtsp://" + ip_address + ":9099/stream";
+                    default_json.server.socket_port_mouse = 1792;
+                    default_json.server.socket_port_keyboard = 1791;
+                    default_json.server.socket_port_mass = 1793;
+                    default_json.server.virtual_media = path; // Added path
+                    default_json.server.encoderIP = ip_address;
+                    default_json.server.decoderIP = decoder_ip; // Current 
+                    default_json.server.remoteMassPath = "./downloads/";
+                    default_json.server.userName = "Admin";
+
+                 
+                    var updated_json = JSON.stringify(default_json, null, 2);
+
+          
+                    var xhr_update_json = new XMLHttpRequest();
+                    xhr_update_json.open('POST', 'update_default_json.php', true);
+                    xhr_update_json.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xhr_update_json.onreadystatechange = function () {
+                        if (xhr_update_json.readyState === 4 && xhr_update_json.status === 200) {
+                            console.log("default.json updated successfully.");
+                            
+                            checkAuthority(id, decoder_id, decoder_ip);
+                        }
+                    };
+                    xhr_update_json.send('json=' + encodeURIComponent(updated_json) + '&file_path=' + encodeURIComponent(file_path));
+                } catch (error) {
+                    console.error("Error parsing JSON:", error);
+                }
+            } else {
+                console.error("Error fetching default.json. Status:", xhr_json.status);
+            }
+        }
+    };
+    xhr_json.send();
+}
+
+function checkAuthority(id, decoder_id, decoder_ip) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'check_authority.php', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            console.log("Response:", response);
+
+            var userAuthority = response.authority;
+            var viewOnly = response.view_only;
+           // var ip_address = response.ip_address;
+            var decoder_ip = response.decoder_ip;
+            
+
+            console.log("Authority: " + userAuthority + ", View Only: " + viewOnly + ", Decoder IP: " + decoder_ip);
+            
+
+            if ((userAuthority === "Share" && viewOnly === "0")) {
+                // If user has Share authority and view_only is 0, or View authority and view_only is 0, proceed to index.html
+                console.log("User has full access. Redirecting to index.html.");
+                window.location.href = "index.html?id=" + id + "&decoder_id=" + decoder_id + "&decoder_ip=" + decoder_ip;
+            }
+
+            else if (userAuthority === "View" && viewOnly === "0") {
+                console.log("NO access. Redirecting to index.html.");
+                window.location.href = "index.html?id=" + id + "&decoder_id=" + decoder_id + "&decoder_ip=" + decoder_ip;
+            }
+
+             else if (viewOnly === "1" || viewOnly === "2" ) {
+              window.location.href = "index.html?id=" + id + "&decoder_id=" + decoder_id + "&decoder_ip=" + decoder_ip;
+            } else {
+                console.log("Access blocked.");
+            }
+        }
+    };
+    xhr.send('id=' + id + '&decoder_id=' + decoder_id);
+}
+
+</script>
+
+<div class="pagination" style="margin-left: 92px;">            
+      </br><a href='user.php?page=2'>  &nbsp; Next </a>    
+</div>  
