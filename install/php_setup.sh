@@ -32,3 +32,6 @@ sudo cp -r /home/acclivis/Downloads/OSD_SOURCE_CODE/* /var/www/html/od
 # Give permissions to PHP files
 sudo chmod -R 777 /var/www/html/od
 sudo chmod -R 777 /var/www/html/od/cache
+sudo chmod -R 777 /var/www/html/od/public
+sudo chmod -R 777 /var/www/html/od/hotkey
+sudo chmod -R 777 /var/www/html/od/css*
