@@ -24,19 +24,12 @@ install_php() {
     ./php_setup.sh
 }
 
-# Function to update WebSocket IP
-update_ws() {
-    chmod +x update_ws_ip.sh  # Add executable permission
-    ./update_ws_ip.sh
-}
-
 # Main function to execute all steps
 main() {
     install_nginx
     configure_nginx
     install_mysql
     install_php
-    update_ws
 }
 
 # Execute the main function
