@@ -42,6 +42,11 @@ server {
         }
     }
 
+        
+    location /home/user/Desktop/LINUX_PACKAGE_INSTALLER/rtsp-stream/config/default.json {
+        # Configuration for serving default.json
+        alias /home/user/Desktop/LINUX_PACKAGE_INSTALLER/rtsp-stream/config/default.json;
+    }
     location ~ /\.ht {
         deny all;
     }
