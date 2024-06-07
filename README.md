@@ -45,33 +45,17 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
     - Password: Admin@123
     - Now you will be able to access the OSD pages and navigate through different tabs and make changes accordingly.
 
-4. **Login as User:**
-    On the Login page enter login credentials as:
-    - Username: User2
-    - Password: User2@12345
-    - Now you will be able to view the OSD pages.
+4. **OSD pages will display on the browser**
 
-5. **OSD pages will display on the browser**
-
-6. **Make changes on OSD:**
-    1. To access the video stream from encoder you can navigate through:
-    Port Access-> Encoder you want to view-> Click on Connect button.
-    2. To change the Resolution:
-    Port Setting-> Resolution-> Select the resolution from the dropdown list for the encoder you want-> Click on Save button.
-    3.  To change the Mac Address:
-    Port Setting-> Mac address-> Enter the mac address for the encoder you want in the textbox -> Click on Save button.
-    4.  To change the Audio:
-    Port Setting-> Audio-> Select the Input and Format from the radio button and drop dwon list for the encoder you want-> Click on Save button.
-    5.  To change the Framerate:
-    Port Setting-> Framerate-> Select the framerate from the dropdown list for the encoder you want-> Click on Save button.
+5. **Make changes on OSD:**
+    1. To access the video stream from encoder1 you can navigate through:
+    Port Access-> Encoder1 -> Click on Connect button.
 
 **Working modules on OSD:**
   
    1. Able to view the stream on OSD.
-   2. Able to Update all the values from OSD i.e portaname, mac address, resolution, audio, framerate, etc. into Database and reflect them on OSD.
-   3. Able Update Username and Enable or Disable user.
-   4. Able to give Admin or User authority to users.
-   5. Hotkey function with Ctrl key.
+   2..Able Update Username and Enable or Disable user.
+   3. Able to give Admin or User authority to users.
 
 **Known Issues:**
    
