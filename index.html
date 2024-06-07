@@ -17,7 +17,7 @@
             position: absolute;
             top: 20px;
             left: 20px;
-            z-index: 2; 
+            z-index: 2;
         }
     </style>
 </head>
@@ -25,7 +25,6 @@
     <div class="navbar">
         <h3>KVM REMOTE DECODER</h3>
         <ul style="position: absolute;right: 30px;">
-       
             <li style="display: inline-flex; padding: 0px 10px 0px 10px;">
                 <button id="closeBtn">Close</button>
             </li>
@@ -40,10 +39,12 @@
     </div>
 
     <script type="text/javascript" src="./public/jsmpeg.js"></script>
+    <script type="text/javascript" src="./public/jsmpeg-min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-        var ws; 
+        var ws;
+        var player;
 
         $(document).ready(function() {
             var params = new URLSearchParams(window.location.search);
@@ -65,7 +66,7 @@
 
                         if (view_only === "0" && authority === "Share") {
                             console.log("Allowing all elements and events.");
-                            allowAllEvents(ip_address);
+                            allowAllEvents(decoder_ip);
                         } else {
                             console.log("Blocking keyboard, mouse, and scroll events.");
                             document.addEventListener('keydown', blockKeyboardEvents, true);
@@ -101,40 +102,90 @@
             event.preventDefault();
         }
 
-       // Function to allow keyboard, mouse, and scroll events
-function allowAllEvents(ip_address) { // Accept IP Address as parameter
-    // Remove event listeners for blocking events
-    document.removeEventListener('keydown', blockKeyboardEvents, true);
-    document.removeEventListener('keyup', blockKeyboardEvents, true);
-    document.removeEventListener('keypress', blockKeyboardEvents, true);
-    document.removeEventListener('mousedown', blockMouseEvents, true);
-    document.removeEventListener('mouseup', blockMouseEvents, true);
-    document.removeEventListener('mousemove', blockMouseEvents, true);
-    document.removeEventListener('click', blockMouseEvents, true);
-    document.removeEventListener('wheel', blockScrollEvents, { passive: false });
+        // Function to allow keyboard, mouse, and scroll events
+        function allowAllEvents(decoder_ip) { // Accept IP Address as parameter
+            // Remove event listeners for blocking events
+            document.removeEventListener('keydown', blockKeyboardEvents, true);
+            document.removeEventListener('keyup', blockKeyboardEvents, true);
+            document.removeEventListener('keypress', blockKeyboardEvents, true);
+            document.removeEventListener('mousedown', blockMouseEvents, true);
+            document.removeEventListener('mouseup', blockMouseEvents, true);
+            document.removeEventListener('mousemove', blockMouseEvents, true);
+            document.removeEventListener('click', blockMouseEvents, true);
+            document.removeEventListener('wheel', blockScrollEvents, { passive: false });
 
+            var wsUrl = "ws://192.168.1.120:9999";
+            console.log("WebSocket URL:", wsUrl);
 
-    var wsUrl = "ws://" + ip_address + ":9099";
-    console.log("WebSocket URL:", wsUrl);
+            // Establish the WebSocket connection
+            ws = new WebSocket(wsUrl);
+            ws.onopen = function(event) {
+                console.log('######### WebSocket is now connected ##########');
+                initializeJSMpeg();
+            };
+            ws.onclose = function(event) {
+                console.log('######### WebSocket is now closed ##########');
+            };
+            ws.onerror = function(error) {
+                console.error('WebSocket Error:', error);
+            };
+        }
 
-    // Establish the WebSocket connection
-    ws = new WebSocket(wsUrl);
-    ws.onopen = function(event) {
-        console.log('######### WebSocket is now connected ##########');
-        initializeJSMpeg();
-    };
-    ws.onclose = function(event) {
-        console.log('######### WebSocket is now closed ##########');
-    };
-    ws.onerror = function(error) {
-        console.error('WebSocket Error:', error);
-    };
-}
+        function initializeJSMpeg() {
+            var canvas = document.getElementById('videoCanvas');
+            player = new JSMpeg.Player('ws://192.168.1.120:9999', {
+                canvas: canvas,
+                autoplay: true,
+                audio: true,
+                loop: true
+            });
 
-function initializeJSMpeg() {
-    var canvas = document.getElementById('videoCanvas');
-    var player = new jsmpeg(ws, { canvas: canvas, autoplay: true, audio: true, loop: true });
-}
+            const screenImg = document.getElementById("videoCanvas");
+            screenImg.addEventListener("mousemove", sendMouseEvent);
+            screenImg.addEventListener("mousedown", sendMouseEvent);
+            screenImg.addEventListener("mouseup", sendMouseEvent);
+        }
+
+        function sendMouseEvent(e) {
+            const boundingRect = e.target.getBoundingClientRect();
+            const cursorX = Math.max(0, e.clientX - boundingRect.left);
+            const cursorY = Math.max(0, e.clientY - boundingRect.top);
+            const width = boundingRect.right - boundingRect.left;
+            const height = boundingRect.bottom - boundingRect.top;
+            const relativeX = Math.min(1.0, Math.max(0.0, cursorX / width));
+            const relativeY = Math.min(1.0, Math.max(0.0, cursorY / height));
+
+            ws.send(JSON.stringify({
+                type: "M",
+                content: [e.buttons, relativeX, relativeY]
+            }));
+        }
+
+        // Add event listener on keydown
+        document.addEventListener('keydown', (event) => {
+            var name = event.key;
+            var code = event.code;
+            var control = 0;
+
+            if (event.ctrlKey) {
+                control = 1;
+            }
+
+            if (event.shiftKey) {
+                control = 2;
+            }
+
+            if (event.ctrlKey && event.shiftKey) {
+                control = 3;
+            }
+
+            ws.send(JSON.stringify({
+                type: "K",
+                content: [name, code, control]
+            }));
+
+            console.log("######### KEYDOWN ############ " + control);
+        }, false);
 
         document.getElementById("closeBtn").onclick = function() {
             var params = new URLSearchParams(window.location.search);
@@ -143,8 +194,8 @@ function initializeJSMpeg() {
             if (decoder_id !== null && id !== null) {
                 $.ajax({
                     type: "POST",
-                    url: "remove_decoder.php", 
-                    data: { decoder_id: decoder_id, id: id }, 
+                    url: "remove_decoder.php",
+                    data: { decoder_id: decoder_id, id: id },
                     success: function(response) {
                         console.log("Decoder removed successfully");
                         window.close(); // Close the window
