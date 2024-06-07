@@ -1,4 +1,4 @@
-# OSD PHP Pages Installation Guide
+# OSD Pages Installation Guide
 
 ## Overview
 This guide will help you set up PHP pages on your server with Nginx, MySQL, and PHP.
@@ -24,13 +24,7 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
         sudo cp -r /path/to/OSD_SOURCE_CODE/* /var/www/html/od        -----(change the path of OSD_SOURCE_CODE in this line)
         Save the file.
 
-    3. Update your board ip address in the update_ws_ip.sh file loacted in the install folder.
-        cd /OSD_SOURCE_CODE/install
-        vi update_ws_ip.sh 
-        new_ip_address="your_desired_ip_address"                      ------(change "your_desired_ip_address" with your board's ip address)
-        Save the file
-
-    4. Make the file executable:
+    3. Make the file executable:
         chmod +x setup.sh
         Run this script: While running it will ask for password enter system's password.
         ./setup.sh
