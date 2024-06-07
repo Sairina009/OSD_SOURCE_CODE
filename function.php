@@ -5,7 +5,7 @@
         <td align=left style=padding:7px style="line-height: 2" ;>&nbsp;<?php echo $lang['F7']; ?> </td>
         <td align="left" style="line-height:2" ;> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <?php 
-            for ($u=1 ; $u<=8; $u++) {
+            for ($u=1 ; $u<=2; $u++) {
                 $row=mysqli_fetch_array($sql);
                 ?>
             <input type=checkbox id=u1 class=save-cb-state name=user<?php echo $u; ?>
@@ -19,7 +19,7 @@
             ?>
             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <?php 
-            for ($u=9 ; $u<=16; $u++) {
+            for ($u=9 ; $u<=2; $u++) {
                 $row=mysqli_fetch_array($sql);
                 ?>
             <input type=checkbox id=u2 class=save-cb-state name=user1<?php echo $u; ?>
@@ -41,7 +41,7 @@
             require_once "DBConnection.php";
             $kvmdata=new DB_con();
             $sql=$kvmdata->userdata();
-            for ($m=1 ; $m<=8; $m++) {
+            for ($m=1 ; $m<=2; $m++) {
                 $row=mysqli_fetch_array($sql);
                 ?>
             <input type=checkbox id=m1 name=mass<?php echo $m; ?>
@@ -55,7 +55,7 @@
             ?>
             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <?php 
-            for ($m=9 ; $m<=16; $m++) {  
+            for ($m=9 ; $m<=2; $m++) {  
                 $row=mysqli_fetch_array($sql);
                 ?>
             <input type=checkbox id=m2 name=mass1<?php echo $m; ?>
@@ -79,7 +79,7 @@
             require_once "DBConnection.php";
             $kvmdata=new DB_con();
             $sql=$kvmdata->userdata();
-            for ($c=1 ; $c<=8; $c++) {
+            for ($c=1 ; $c<=2; $c++) {
                 $row=mysqli_fetch_array($sql);
                 ?>
             <input type=checkbox id=c1 name=card<?php echo $c; ?>
@@ -93,7 +93,7 @@
             ?>
             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <?php 
-            for ($c=9 ; $c<=16; $c++) {  
+            for ($c=9 ; $c<=2; $c++) {  
                 $row=mysqli_fetch_array($sql);
                 ?>
             <input type=checkbox id=c2 name=card1<?php echo $c; ?>
@@ -115,7 +115,7 @@
             require_once "DBConnection.php";
             $kvmdata=new DB_con();
             $sql=$kvmdata->userdata();  
-            for ($v=1 ; $v<=8; $v++) {
+            for ($v=1 ; $v<=2; $v++) {
                 $row=mysqli_fetch_array($sql);
                 ?>
             <input type=checkbox id=v1 name=virtual<?php echo $v; ?>
@@ -129,7 +129,7 @@
             ?>
             <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <?php 
-            for ($v=9 ; $v<=16; $v++) {  
+            for ($v=9 ; $v<=2; $v++) {  
                 $row=mysqli_fetch_array($sql);
                 ?>
             <input type=checkbox id=v2 name=virtual1<?php echo $v; ?>
