@@ -1,4 +1,3 @@
-
 <?php  
 session_start(); 
 
@@ -13,18 +12,23 @@ $view = $_SESSION['view'] ?? '';
 // Define tabs based on user role
 if ($is_admin) {
     // Tabs for admin
+    if ($is_admin) {
+    // Tabs for admin
     $tabs = array(
-     array(
-    'url' => ($view == 'ON') ? 'demo.php' : 'user.php',
-    'text' => $lang['H2'],
-    'active' => (($view == 'ON' && $_SERVER['PHP_SELF'] == '/od/demo.php') || ($view != 'ON' && $_SERVER['PHP_SELF'] == '/od/user.php'))
-),
-        array('url' => 'portname.php', 'text' => $lang['H3'], 'active' => ($_SERVER['PHP_SELF'] == '/od/portname.php' || $_SERVER['PHP_SELF'] == '/od/macadd.php' || $_SERVER['PHP_SELF'] == '/od/audio.php' || $_SERVER['PHP_SELF'] == '/od/resolution.php' || $_SERVER['PHP_SELF'] == '/od/framerate.php' || $_SERVER['PHP_SELF'] == '/od/linktype.php' || $_SERVER['PHP_SELF'] == '/od/virtualmedia.php' || $_SERVER['PHP_SELF'] == '/od/portenable.php' || $_SERVER['PHP_SELF'] == '/od/scan.php' || $_SERVER['PHP_SELF'] == '/od/portauthority.php')),
-        array('url' => 'username.php', 'text' => $lang['H4'], 'active' => ($_SERVER['PHP_SELF'] == '/od/username.php' || $_SERVER['PHP_SELF'] == '/od/userenable.php' || $_SERVER['PHP_SELF'] == '/od/use.raut.php' || $_SERVER['PHP_SELF'] == '/od/userpass.php' || $_SERVER['PHP_SELF'] == '/od/function.php' )),
-        array('url' => 'kvmname.php', 'text' => $lang['H5'], 'active' => ($_SERVER['PHP_SELF'] == '/od/kvmname.php' || $_SERVER['PHP_SELF'] == '/od/time.php' || $_SERVER['PHP_SELF'] == '/od/lang.php' || $_SERVER['PHP_SELF'] == '/od/hotkey.php' || $_SERVER['PHP_SELF'] == '/od/thumbnailview.php' || $_SERVER['PHP_SELF'] == '/od/banner.php' || $_SERVER['PHP_SELF'] == '/od/encryption.php' )),
-        array('url' => 'kvmupgrade.php', 'text' => $lang['H6'], 'active' => ($_SERVER['PHP_SELF'] == '/od/kvmupgrade.php' || $_SERVER['PHP_SELF'] == '/od/dongleupgrade.php' || $_SERVER['PHP_SELF'] == '/od/reboot.php' || $_SERVER['PHP_SELF'] == '/od/upgradehistory.php' || $_SERVER['PHP_SELF'] == '/od/auditlog.php' )),
-        array('url' => 'help.php', 'text' => $lang['H7'], 'active' => ($_SERVER['PHP_SELF'] == '/od/help.php'))
-    );
+    array(
+        'url' => ($view == 'OFF') ? 'user.php' : '',
+        'text' => $lang['H2'],
+        'active' => true,
+        'disabled' => false
+    ),
+    array('url' => 'portname.php', 'text' => $lang['H3'], 'active' => false, 'disabled' => true),
+    array('url' => 'username.php', 'text' => $lang['H4'], 'active' => true, 'disabled' => false),
+    array('url' => 'kvmname.php', 'text' => $lang['H5'], 'active' => false, 'disabled' => true),
+    array('url' => 'kvmupgrade.php', 'text' => $lang['H6'], 'active' => false, 'disabled' => true),
+    array('url' => 'help.php', 'text' => $lang['H7'], 'active' => false, 'disabled' => true)
+);
+}
+
 } else {
     // Tabs for regular user
     $tabs = array(
@@ -148,9 +152,10 @@ if ($is_admin) {
         </div>
  <ul class="nav nav-tabs" style="width: 1700px; height: 902px; overflow: hidden; margin-left: 25px;">
             <?php foreach ($tabs as $tab): ?>
-                <li class="nav-item <?php echo ($tab['active'] ? 'active' : ''); ?>">
-                    <a class="nav-link" href="<?php echo $tab['url']; ?>"><?php echo $tab['text']; ?></a>
-                </li>
+               <li class="nav-item <?php echo ($tab['active'] ? 'active' : ''); ?> <?php echo ($tab['disabled'] ? 'disabled' : ''); ?>">
+    <a class="nav-link <?php echo ($tab['disabled'] ? 'disabled' : ''); ?>" href="<?php echo $tab['url']; ?>"><?php echo $tab['text']; ?></a>
+</li>
+
             <?php endforeach; ?>
         </ul>
         <div
