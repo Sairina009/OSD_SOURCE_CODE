@@ -33,32 +33,33 @@ This guide will help you set up PHP pages on your server with Nginx, MySQL, and 
    Open a web browser and navigate to your Board IP address and specify /od.
    (eg. 192.168.0.108/od/index.php)   where 192.168.0.108 is your board ip address.
 
-3. **Login as Admin:**
+3. **Login as Admin:** Currently only 2 uers are available and their credentials are listed below. You can login into OSD using them.
    On the Login page enter login credentials as:
     - Username: Admin
     - Password: Admin@123
     - Now you will be able to access the OSD pages and navigate through different tabs and make changes accordingly.
 
+   On the Login page enter login credentials as:
+    - Username: User2
+    - Password: User2@12345
+    - Now you will be able to access the OSD pages and navigate through different tabs and make changes accordingly.
+
 4. **OSD pages will display on the browser**
 
-5. **Make changes on OSD:**
-    1. To access the video stream from encoder1 you can navigate through:
+5. **Make changes on OSD:**  Currently Encoder1 is set to be viewed on the OSD and Encoder2 is set to be viewed on Local Decoder.
+    1. To access the video stream from Encoder1 you can navigate through:
     Port Access-> Encoder1 -> Click on Connect button.
 
 **Working modules on OSD:**
   
-   1. Able to view the stream on OSD.
-   2..Able Update Username and Enable or Disable user.
-   3. Able to give Admin or User authority to users.
-
+   1. Able to view Video stream on OSD.
+   2. Mouse and Keyboard functionality working on OSD.
+   3. Able Update Username and Enable or Disable user.
+      
 **Known Issues:**
    
-   1. Delay in streaming.
-   2. USB Mass Storage is not working.
-   3. Kvm Upgrade, Dongle Upgrade not implemented.
-   4. Encryption is not implemented.
-   5. Virtual Media, Port Authority, Port Scan not implemented.
-   6. USB mass storage, card reader not implemented.
+   1. Delay in video streaming.
+   2. Port Setting, Kvm setting, Maintainance and Help tabs are disabled. Currently these tabs won't be accessible.
 
 **Troubleshooting:**
 - Ensure that file permissions are set correctly on the PHP files and directories.
